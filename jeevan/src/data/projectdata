@@ -1,0 +1,69 @@
+const projectData = [
+  {
+    id: "ecommerce-fullstack",
+    title: "Ecommerce Full-stack Website",
+    category: "Web",
+    date: "May 2025",
+    status: "In Progress",
+    description: "A modern, full-featured e-commerce platform with real-time chatbot support.",
+    image: "/images/ecommerce-preview.png",
+    galleryImage: "/images/ecommerce-gallery.png",
+    goal:
+      "The goal of this personal project was to build a complete, end-to-end e-commerce solution from scratch...",
+    features: [
+      "Secure user authentication with Clerk",
+      "Fully functional shopping cart",
+      "Integrated chatbot for customer support",
+      "Dynamic product catalog with search and filtering",
+      "Stripe integration for payments (test mode)",
+    ],
+    technologies: ["Next.js", "TailwindCSS", "Clerk", "MongoDB", "Stripe"],
+    demo: "https://your-demo-link.com",
+    github: "https://github.com/yourusername/ecommerce",
+  },
+  {
+    id: "green-grocery",
+    title: "Green Grocery Full-stack Website",
+    category: "Web",
+    date: "May 2025",
+    status: "In Progress",
+    description: "An organic grocery delivery app with a clean interface.",
+    image: "/images/grocery-preview.png",
+    galleryImage: "/images/grocery-gallery.png",
+    goal:
+      "This project aims to deliver organic products directly to users while learning how to manage backend-heavy apps with user dashboards, product filters, and geolocation-based delivery.",
+    features: [
+      "Geo-based product filtering",
+      "Admin dashboard for product management",
+      "Custom checkout with discounts",
+      "Authentication with Clerk",
+      "MongoDB Atlas-backed data handling",
+    ],
+    technologies: ["Next.js", "TailwindCSS", "MongoDB", "Node.js", "Clerk"],
+    demo: "https://your-demo-link.com",
+    github: "https://github.com/yourusername/grocery",
+  },
+  {
+    id: "bookstore-frontend",
+    title: "Online Bookstore Frontend",
+    category: "Web",
+    date: "Jan 2025",
+    status: "Completed",
+    description: "The UI for a collaborative bookstore with responsive design.",
+    image: "/images/bookstore-preview.png",
+    galleryImage: "/images/bookstore-gallery.png",
+    goal:
+      "To build a clean and responsive frontend that integrates with a backend REST API and supports user browsing, searching, and cart features.",
+    features: [
+      "Responsive grid layout",
+      "React Query-based API fetching",
+      "Light and dark themes",
+      "Category-based product filtering",
+    ],
+    technologies: ["Next.js", "TailwindCSS", "React Query", "TypeScript"],
+    demo: "https://your-demo-link.com",
+    github: "https://github.com/yourusername/bookstore-frontend",
+  }
+];
+
+export default projectData;

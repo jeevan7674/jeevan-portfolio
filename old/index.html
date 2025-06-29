@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeevan Reddy | Web Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/1.0.0/font-awesome-animation.min.css">
+
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <i class="fas fa-moon" id="theme-icon"></i>
+  </div>
+
+  <!-- Header Section (Navbar) -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Jeevan<span>Reddy</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#hero">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#experience">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 text-center text-lg-start">
+          <h1 class="animate__animated animate__fadeInUp">Hi, I'm <span class="highlight">R.Jeevan Reddy</span></h1>
+          <h2 class="animate__animated animate__fadeInUp animate__delay-1s">Full Stack Developer</h2>
+          <p class="lead animate__animated animate__fadeInUp animate__delay-2s">Creating elegant, responsive, and functional web applications</p>
+          <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-3s">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-outline-primary">Contact Me</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="profile-img-container animate__animated animate__fadeIn animate__delay-1s">
+            <div class="profile-img-inner">
+              <img src="jeevanreddy.jpg" alt="Jeevanreddy" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <a href="#about"><i class="fas fa-chevron-down"></i></a>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about" class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2>About Me</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="about-content">
+            <h3>Hello! I'm Jeevan, a Passionate Web Developer</h3>
+            <p>I specialize in creating modern, interactive, and user-friendly web applications that deliver exceptional user experiences. With expertise in front-end and back-end technologies, I bring ideas to life with clean, efficient code.</p>
+            <p>My journey in web development began 5 years ago, and since then, I've worked on a variety of projects ranging from simple landing pages to complex full-stack applications. I'm constantly learning and experimenting with new technologies to stay at the forefront of this rapidly evolving field.</p>
+            <p>When I'm not coding, you can find me contributing to open-source projects, sharing knowledge in developer communities, or exploring the outdoors for fresh inspiration.</p>
+            <div class="about-info">
+              <div class="info-item">
+                <span>Name:</span>
+                <p>Jeevan Reddy</p>
+              </div>
+              <div class="info-item">
+                <span>Email:</span>
+                <p>jeevanreddyr680@gmail.com</p>
+              </div>
+              <div class="info-item">
+                <span>Location:</span>
+                <p>Bhimavaram, Andhra Pradesh</p>
+              </div>
+              <div class="info-item">
+                <span>Availability:</span>
+                <p>Open to opportunities</p>
+              </div>
+            </div>
+            <div class="about-buttons">
+              <a href="#" class="btn btn-primary" id="download-cv">Download CV</a>
+              <a href="#contact" class="btn btn-outline-primary">Hire Me</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="about-stats">
+            <h3>My Development Focus</h3>
+            <div class="progress-item">
+              <div class="progress-info">
+                <h4>Front-End Development</h4>
+                <span>90%</span>
+              </div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-info">
+                <h4>Back-End Development</h4>
+                <span>80%</span>
+              </div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-info">
+                <h4>UI/UX Design</h4>
+                <span>75%</span>
+              </div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-info">
+                <h4>DevOps</h4>
+                <span>70%</span>
+              </div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section-padding bg-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>My Skills</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="skills-container">
+            <h3>Technical Skills</h3>
+            <div class="skill-category">
+              <h4>Languages</h4>
+              <div class="skill-tags">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3/SASS</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">PHP</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4>Frameworks & Libraries</h4>
+              <div class="skill-tags">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Vue.js</span>
+                <span class="skill-tag">Angular</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Express</span>
+                <span class="skill-tag">Bootstrap</span>
+                <span class="skill-tag">Tailwind CSS</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4>Tools & Platforms</h4>
+              <div class="skill-tags">
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">GitHub</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Firebase</span>
+                <span class="skill-tag">Netlify</span>
+                <span class="skill-tag">Vercel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="skills-showcase">
+            <div class="skill-icon-container">
+              <div class="skill-icon" data-name="JavaScript">
+                <i class="fab fa-js"></i>
+              </div>
+              <div class="skill-icon" data-name="React">
+                <i class="fab fa-react"></i>
+              </div>
+              <div class="skill-icon" data-name="Node.js">
+                <i class="fab fa-node-js"></i>
+              </div>
+              <div class="skill-icon" data-name="HTML5">
+                <i class="fab fa-html5"></i>
+              </div>
+              <div class="skill-icon" data-name="CSS3">
+                <i class="fab fa-css3-alt"></i>
+              </div>
+              <div class="skill-icon" data-name="Git">
+                <i class="fab fa-git-alt"></i>
+              </div>
+              <div class="skill-icon" data-name="Docker">
+                <i class="fab fa-docker"></i>
+              </div>
+              <div class="skill-icon" data-name="AWS">
+                <i class="fab fa-aws"></i>
+              </div>
+              <div class="skill-icon" data-name="Python">
+                <i class="fab fa-python"></i>
+              </div>
+            </div>
+            <div class="skill-info">
+              <h3>Hover over an icon to learn more</h3>
+              <div id="skill-description">My technical expertise enables me to create responsive, scalable web applications.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2>My Projects</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="mobile">Mobile</button>
+      </div>
+      <div class="row project-container">
+        <div class="col-lg-4 col-md-6 project-item" data-category="frontend">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="ecommerce.jpeg" alt="E-commerce Dashboard" class="img-fluid">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link" title="View Demo"><i class="fas fa-eye"></i></a>
+                  <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>E-commerce Dashboard</h3>
+              <p>A responsive admin dashboard for managing online store inventory, orders, and customer data.</p>
+              <div class="project-tech">
+                <span>React</span>
+                <span>Redux</span>
+                <span>Chart.js</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 project-item" data-category="fullstack">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="socialmedia.png" alt="Social Media Platform" class="img-fluid">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link" title="View Demo"><i class="fas fa-eye"></i></a>
+                  <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Social Media Platform</h3>
+              <p>A full-stack social networking application with real-time messaging and content sharing.</p>
+              <div class="project-tech">
+                <span>Node.js</span>
+                <span>Express</span>
+                <span>MongoDB</span>
+                <span>Socket.io</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 project-item" data-category="mobile">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="fitnesstracker.png" alt="Fitness Tracker App" class="img-fluid">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link" title="View Demo"><i class="fas fa-eye"></i></a>
+                  <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Fitness Tracker App</h3>
+              <p>A cross-platform mobile application for tracking workouts, nutrition, and health metrics.</p>
+              <div class="project-tech">
+                <span>React Native</span>
+                <span>Firebase</span>
+                <span>Redux</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 project-item" data-category="frontend">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="weatherapp.webp" alt="Weather Dashboard" class="img-fluid">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link" title="View Demo"><i class="fas fa-eye"></i></a>
+                  <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Weather Dashboard</h3>
+              <p>Interactive weather application with location-based forecasts and historical data visualization.</p>
+              <div class="project-tech">
+                <span>Vue.js</span>
+                <span>D3.js</span>
+                <span>OpenWeather API</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 project-item" data-category="fullstack">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="taskmanagement.webp" alt="Task Management System" class="img-fluid">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link" title="View Demo"><i class="fas fa-eye"></i></a>
+                  <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Task Management System</h3>
+              <p>A collaborative project management tool with task assignment, tracking, and reporting features.</p>
+              <div class="project-tech">
+                <span>Angular</span>
+                <span>Express</span>
+                <span>PostgreSQL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 project-item" data-category="mobile">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="travelcompanion.jpeg" alt="Travel Companion App" class="img-fluid">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link" title="View Demo"><i class="fas fa-eye"></i></a>
+                  <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Travel Companion App</h3>
+              <p>A travel planning and exploration app with itinerary management and local recommendations.</p>
+              <div class="project-tech">
+                <span>Flutter</span>
+                <span>Google Maps API</span>
+                <span>Firebase</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <a href="#" class="btn btn-primary">View All Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section-padding bg-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>Work Experience</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2022 - Present</div>
+          <div class="timeline-content">
+            <h3>Senior Front-End Developer</h3>
+            <h4>Tech Innovations Inc.</h4>
+            <p>Lead a team of 5 developers in building responsive web applications. Implemented modern JavaScript frameworks to enhance user experience and improve application performance by 40%.</p>
+            <ul>
+              <li>Developed and maintained the company's flagship SaaS product</li>
+              <li>Reduced load time by 60% through code optimization</li>
+              <li>Implemented CI/CD pipelines to streamline development</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2020 - 2022</div>
+          <div class="timeline-content">
+            <h3>Full Stack Developer</h3>
+            <h4>WebSolutions Co.</h4>
+            <p>Created full-stack web applications for various clients using React, Node.js, and MongoDB. Collaborated with UX/UI designers to implement responsive and accessible interfaces.</p>
+            <ul>
+              <li>Developed RESTful APIs for enterprise applications</li>
+              <li>Implemented authentication systems with OAuth and JWT</li>
+              <li>Worked with agile development methodologies</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2018 - 2020</div>
+          <div class="timeline-content">
+            <h3>Junior Web Developer</h3>
+            <h4>Digital Creations Ltd.</h4>
+            <p>Assisted in developing and maintaining client websites. Gained hands-on experience with various web technologies and frameworks.</p>
+            <ul>
+              <li>Built responsive websites using HTML5, CSS3, and JavaScript</li>
+              <li>Implemented custom WordPress themes and plugins</li>
+              <li>Collaborated with the design team to ensure visual consistency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2>Testimonials</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="testimonial-slider">
+        <div class="testimonial-item active">
+          <div class="testimonial-content">
+            <p>"John is an exceptional developer who consistently delivers high-quality work. His attention to detail and problem-solving skills make him a valuable asset to any team."</p>
+            <div class="testimonial-author">
+              <img src="person1.jpg" alt="Sarah Johnson" class="testimonial-image">
+              <div class="testimonial-info">
+                <h4>Sarah Johnson</h4>
+                <p>CTO, Tech Innovations Inc.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-item">
+          <div class="testimonial-content">
+            <p>"Working with John was a fantastic experience. He not only met our technical requirements but also provided valuable insights that improved our project beyond our expectations."</p>
+            <div class="testimonial-author">
+              <img src="person2.jpg" alt="Michael Chen" class="testimonial-image">
+              <div class="testimonial-info">
+                <h4>Michael Chen</h4>
+                <p>Product Manager, WebSolutions Co.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-item">
+          <div class="testimonial-content">
+            <p>"John's expertise in modern web technologies helped transform our outdated platform into a sleek, high-performing application that our users love."</p>
+            <div class="testimonial-author">
+              <img src="person3.jpg" alt="Lisa Rodriguez" class="testimonial-image">
+              <div class="testimonial-info">
+                <h4>Lisa Rodriguez</h4>
+                <p>Founder, StartupX</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-nav">
+        <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="testimonial-dots">
+          <span class="testimonial-dot active" data-index="0"></span>
+          <span class="testimonial-dot" data-index="1"></span>
+          <span class="testimonial-dot" data-index="2"></span>
+        </div>
+        <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section-padding bg-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get In Touch</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <div class="contact-info">
+            <h3>Let's Connect</h3>
+            <p>Feel free to reach out for collaboration, job opportunities, or just to say hello. I'm always open to discussing new projects and ideas.</p>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Location</h4>
+                <p>Bhimavaram, Andhra Pradesh</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Email</h4>
+                <p>jeevanreddyr680@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Phone</h4>
+                <p>7569201574</p>
+              </div>
+            </div>
+            <div class="social-links mt-4">
+              <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="contact-form-container">
+            <form id="contact-form" class="contact-form">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+              <div id="form-message" class="mt-3"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="footer-info">
+            <h3>Jeevan<span>Reddy</span></h3>
+            <p>A passionate Web Developer focused on creating innovative and user-friendly web applications.</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#hero">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#" id="privacy-policy">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="copyright">
+          &copy; <span id="current-year"></span> <strong>Jeevan Reddy</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          Designed with <i class="fas fa-heart"></i> by Jeevanreddy
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
