@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import {
@@ -7,7 +7,7 @@ import {
   GithubIcon,
   LinkedinIcon,
   Send,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -17,19 +17,15 @@ const Card = ({ className, children, ...props }) => (
     {children}
   </div>
 );
-
 const CardHeader = ({ children, className }) => (
   <div className={`p-6 border-b border-purple-500/20 ${className}`}>{children}</div>
 );
-
 const CardTitle = ({ children, className }) => (
   <h3 className={`text-xl font-semibold ${className}`}>{children}</h3>
 );
-
 const CardContent = ({ children, className }) => (
   <div className={`p-6 ${className}`}>{children}</div>
 );
-
 const Button = ({ children, className, ...props }) => (
   <button
     className={`inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-ring ${className}`}
@@ -38,37 +34,81 @@ const Button = ({ children, className, ...props }) => (
     {children}
   </button>
 );
-
 const Input = ({ className, ...props }) => (
   <input
     className={`w-full px-3 py-2 rounded-md bg-slate-900/50 border text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 ${className}`}
     {...props}
   />
 );
-
 const Textarea = ({ className, ...props }) => (
   <textarea
     className={`w-full px-3 py-2 rounded-md bg-slate-900/50 border text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 ${className}`}
     {...props}
   />
 );
-
 const Label = ({ htmlFor, className, children }) => (
   <label htmlFor={htmlFor} className={`block mb-1 font-medium ${className}`}>
     {children}
   </label>
 );
 
+// ✅ TypewriterTextLoop with Hover-to-Pause
+const TypewriterTextLoop = ({ texts, typingSpeed = 100, pauseTime = 1500 }) => {
+  const [index, setIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const requestRef = useRef();
+
+  useEffect(() => {
+    const type = () => {
+      if (paused) return;
+
+      const fullText = texts[index];
+      const nextChar = isDeleting
+        ? fullText.substring(0, displayedText.length - 1)
+        : fullText.substring(0, displayedText.length + 1);
+
+      setDisplayedText(nextChar);
+
+      if (!isDeleting && nextChar === fullText) {
+        setTimeout(() => setIsDeleting(true), pauseTime);
+      } else if (isDeleting && nextChar === '') {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % texts.length);
+      }
+    };
+
+    const tick = () => {
+      type();
+      requestRef.current = setTimeout(tick, isDeleting ? typingSpeed / 2 : typingSpeed);
+    };
+
+    requestRef.current = setTimeout(tick, typingSpeed);
+    return () => clearTimeout(requestRef.current);
+  }, [displayedText, isDeleting, index, texts, paused]);
+
+  return (
+    <h2
+      className="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-white cursor-default"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {displayedText}
+      <span className="border-r-2 border-purple-400 animate-pulse ml-1" />
+    </h2>
+  );
+};
+
 // Animations
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
-
 const successVariant = {
   initial: { opacity: 0, scale: 0.8 },
   animate: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.4 } }
+  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.4 } },
 };
 
 const Contact = () => {
@@ -95,7 +135,6 @@ const Contact = () => {
     }
 
     setIsSubmitting(true);
-
     emailjs.send(
       'service_coxs2d4',
       'template_0okl6vf',
@@ -103,17 +142,10 @@ const Contact = () => {
       'Xlh9orUaqZ2c3UTEF'
     ).then(() => {
       setIsSuccess(true);
-      toast({
-        title: 'Message sent!',
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
+      toast({ title: 'Message sent!', description: "Thank you for your message. I'll get back to you soon." });
       setFormData({ name: '', email: '', subject: '', message: '' });
     }).catch((error) => {
-      toast({
-        title: 'Error',
-        description: 'Something went wrong. Please try again later.',
-        variant: 'destructive',
-      });
+      toast({ title: 'Error', description: 'Something went wrong. Please try again later.', variant: 'destructive' });
       console.error(error);
     }).finally(() => {
       setIsSubmitting(false);
@@ -138,13 +170,7 @@ const Contact = () => {
         <motion.div variants={fadeInUp} className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 px-2 sm:px-4 max-w-6xl mx-auto">
           {/* Left Column */}
           <div className="flex flex-col gap-6">
-            {/* Resume Card */}
             <Card className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 text-white p-6 sm:p-8">
-              <div className="mb-4 text-center">
-                <span className="inline-block px-4 py-1 text-sm font-medium bg-purple-500/20 rounded-full text-purple-300">
-                  My Professional Background
-                </span>
-              </div>
               <h2 className="text-3xl font-bold mb-4 text-center">Resume</h2>
               <p className="text-sm text-gray-300 mb-6 text-center">
                 Take a look at my professional experience and skills. You can view it directly in your browser or download a PDF copy for your convenience.
@@ -163,10 +189,17 @@ const Contact = () => {
               </div>
             </Card>
 
-            {/* Contact Info Card */}
             <Card className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 text-white p-6 sm:p-10">
               <p className="uppercase tracking-widest text-sm mb-4 sm:mb-6 text-center text-purple-300">Looking for a new talent?</p>
-              <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 break-words text-center">dpspraveena.1376@gmail.com</h2>
+              <TypewriterTextLoop
+                texts={[
+                  'Jeevan Reddy',
+                  'r.jeevanreddys680@gmail.com',
+                  'Full Stack Developer',
+                  'UI/UX Designer',
+                  'Open Source Contributor',
+                ]}
+              />
               <div className="flex justify-center flex-wrap gap-4 sm:gap-6 text-base mt-4 sm:mt-8">
                 <a href="https://linkedin.com/jeevan-reddy680" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 flex items-center gap-2">
                   <LinkedinIcon className="w-5 h-5 text-blue-400" /> LinkedIn
