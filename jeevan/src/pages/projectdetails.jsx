@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ExternalLink, Github, Calendar, Tag, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
-import projectData from '@/data/projectData';
 import Header from './header';
+import projectData from '@/data/projectdata.jsx';
 
 // ✅ Updated Button Component
 const Button = ({ children, className = '', variant = 'default', ...props }) => {

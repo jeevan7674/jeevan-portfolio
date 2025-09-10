@@ -7,7 +7,7 @@
     status: "In Progress",
     description:
       "An e-commerce platform to browse and shop sports and yoga products with a clean and modern UI.",
-    image: "public/jeesum1.png",
+    image: "jeesum1.png",
     galleryImage: "/images/active-harmony-gallery.png",
     goal:
       "The goal of this project is to create a seamless shopping experience for fitness enthusiasts, combining both sports and yoga products in one platform.",
@@ -30,8 +30,8 @@
     status: "In Progress",
     description:
       "A dynamic form builder allowing users to create, share, and manage forms efficiently.",
-    image: "public/jeesum1.png",
-    galleryImage: "public/jeesum1.png",
+    image: "jeesum1.png",
+    galleryImage: "jeesum1.png",
     goal:
       "To build a flexible form management system where users can design dynamic forms, collect responses, and analyze data easily.",
     features: [
@@ -53,8 +53,8 @@
     status: "In Progress",
     description:
       "A location tracking app for user consent tracking with emergency alerts and quick responses.",
-    image: "public/trackfam.png",
-    galleryImage: "public/trackfam.png",
+    image: "trackfam.png",
+    galleryImage: "trackfam.png",
     goal:
       "To create a reliable and safe tracking system for families, providing real-time location updates and emergency response notifications.",
     features: [
@@ -76,8 +76,8 @@
     status: "In Progress",
     description:
       "A club management web and app platform using AI agents and n8n automations for registration and alerts.",
-    image: "public/languagenest1.png",
-    galleryImage: "public/languagenest1.png",
+    image: "languagenest1.png",
+    galleryImage: "languagenest1.png",
     goal:
       "To streamline club management with AI-powered automations for member registration, event reminders, and notifications.",
     features: [
@@ -99,8 +99,8 @@
   status: "Completed",
   description:
     "A responsive website built with HTML, CSS, and JavaScript dedicated to the Art of Living organization.",
-  image: "public/art-of-living1.png",
-  galleryImage: "public/art-of-living1.png",
+  image: "art-of-living1.png",
+  galleryImage: "art-of-living1.png",
   goal:
     "To create an informative and visually appealing website for the Art of Living organization, showcasing its programs, events, and initiatives.",
   features: [
