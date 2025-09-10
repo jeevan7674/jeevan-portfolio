@@ -106,7 +106,7 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="py-20 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900 relative overflow-hidden"
+      className="py-20 relative overflow-hidden"
     >
       {/* Decorative Blur Circles */}
       <div className="absolute top-0 right-0 w-56 h-56 bg-purple-500/10 rounded-full blur-2xl"></div>

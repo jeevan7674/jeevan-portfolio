@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Calendar, CheckCircle } from 'lucide-react';
+import { Github, ExternalLink, Calendar, CheckCircle, Clock } from 'lucide-react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
+import projectData from '@/data/projectdata';
 
-// Button Component
+// Button Variants
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:shadow-lg',
-        outline: 'border border-purple-500/50 text-purple-300 hover:bg-purple-500/20',
+        default: 'bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:shadow-md',
+        outline: 'border border-purple-500 text-purple-300 hover:bg-purple-600/10',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 px-3',
-        lg: 'h-11 px-8',
+        default: 'h-10 px-4',
+        sm: 'h-9 px-3 text-sm',
+        lg: 'h-11 px-6 text-base',
       },
     },
     defaultVariants: {
@@ -30,153 +32,190 @@ const buttonVariants = cva(
 const Button = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : 'button';
   return (
-    <Comp
-      className={cn(buttonVariants({ variant, size }), className)}
-      ref={ref}
-      {...props}
-    />
+    <Comp className={cn(buttonVariants({ variant, size }), className)} ref={ref} {...props} />
   );
 });
 Button.displayName = 'Button';
 
-// Card Components
-const Card = ({ className, ...props }) => (
-  <div className={cn('rounded-xl border bg-card text-card-foreground shadow', className)} {...props} />
-);
-const CardHeader = ({ className, ...props }) => (
-  <div className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />
-);
-const CardTitle = ({ className, ...props }) => (
-  <h3 className={cn('text-xl font-semibold leading-none tracking-tight', className)} {...props} />
-);
-const CardContent = ({ className, ...props }) => (
-  <div className={cn('p-6 pt-0', className)} {...props} />
-);
-
 // Badge Component
 const Badge = ({ className, children }) => (
-  <div className={cn('inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors', className)}>
+  <div className={cn('inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold', className)}>
     {children}
   </div>
 );
 
-// Projects Component
+// Main Component
 const Projects = () => {
-  const projects = [
-    {
-      title: "Ecommerce Full-stack Website",
-      description: "A modern, full-featured e-commerce platform with real-time chatbot support.",
-      status: "In Progress",
-      date: "Start: 27 May 2025",
-      technologies: ["Next.js", "TailwindCSS", "Clerk", "MongoDB", "Stripe"],
-      github: "https://github.com",
-      demo: "https://demo.com",
-      image: "/images/project1.png"
-    },
-    {
-      title: "Green Grocery Full-stack Website",
-      description: "An online store specializing in fresh, organic groceries.",
-      status: "In Progress",
-      date: "Start: 27 May 2025",
-      technologies: ["Next.js", "TailwindCSS", "Clerk", "MongoDB", "Node.js"],
-      github: "https://github.com",
-      demo: "https://demo.com",
-      image: "/images/project2.png"
-    },
-    {
-      title: "Online Bookstore Frontend",
-      description: "The client-side application for a collaborative online bookstore project.",
-      status: "Completed",
-      date: "Start: 11 Jan 2025",
-      technologies: ["Next.js", "TailwindCSS", "TypeScript", "React Query"],
-      github: "https://github.com",
-      demo: "https://demo.com",
-      image: "/images/project3.png"
-    }
-  ];
+  const [activeFilter, setActiveFilter] = useState('All');
+  const navigate = useNavigate();
+  const projects = projectData;
+
+
+  const filteredProjects =
+    activeFilter === 'All'
+      ? projects
+      : projects.filter((p) => p.category === activeFilter);
+
+  const categories = ['All', ...new Set(projects.map((p) => p.category))];
 
   return (
-    <section id="projects" className="py-20 bg-[#0c0c1d] relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-10">
-          <motion.div className="inline-block px-4 py-2 bg-purple-500/20 rounded-full mb-6"
+    <section id='projects'
+    className="py-20 text-white">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <motion.div
+            className="inline-block px-4 py-2 bg-purple-600/20 rounded-full mb-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}>
-            <span className="text-purple-400 text-sm font-medium">My recent work</span>
+            viewport={{ once: true }}
+          >
+            <span className="text-purple-300 text-sm font-medium tracking-widest">My Recent Work</span>
           </motion.div>
 
-          <motion.h2 className="text-4xl font-bold text-white mb-4"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+          <motion.h2
+            className="text-4xl sm:text-5xl font-extrabold mb-2"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}>
+            viewport={{ once: true }}
+          >
             Featured Projects
           </motion.h2>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-purple-400 to-violet-400 mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-violet-400 mx-auto rounded-full mb-6" />
 
-          <div className="flex justify-center gap-4 mb-6">
-            {['All', 'Web', 'AI', 'Mobile'].map((filter) => (
-              <button key={filter} className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all
-                ${filter === 'All'
-                  ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white'
-                  : 'bg-[#1b1b2f] text-gray-300 hover:bg-[#2a2a3c]'}`}>
+          {/* Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-3 mt-4">
+            {categories.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${activeFilter === filter
+                    ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white'
+                    : 'bg-[#1c1c2e] text-gray-300 hover:bg-[#292944]'
+                  }`}
+              >
                 {filter}
               </button>
             ))}
           </div>
         </div>
 
-        <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        {/* Projects Grid */}
+        <motion.div
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.15 } }
-          }}>
-          {projects.map((project, index) => (
-            <motion.div key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative group bg-[#141425] border border-[#23263b] rounded-xl overflow-hidden hover:shadow-lg transition duration-300">
-              <div className="aspect-video overflow-hidden">
-                <img src={project.image} alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+              onClick={() => navigate(`/projects/${project.id}`)}
+              className="cursor-pointer rounded-2xl overflow-hidden bg-[#10101A] text-white flex flex-col shadow-md border border-[#1c1c2b] min-h-[480px]"
+            >
+              {/* Image */}
+              <div className="w-full h-[200px]">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <CardHeader>
-                <div className="flex justify-between items-center mb-2">
-                  <CardTitle className="text-white group-hover:text-purple-300 transition">{project.title}</CardTitle>
-                  <Badge className={`${project.status === 'Completed'
-                    ? 'bg-green-500/20 text-green-300 border-green-500/30'
-                    : 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'}`}>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-grow justify-between">
+                {/* Title */}
+                <h3 className="text-xl font-bold text-teal-400 mb-1 tracking-tight">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-gray-400 text-sm mb-4 tracking-wide">
+                  {project.description}
+                </p>
+
+                {/* Date & Status */}
+                <div className="flex justify-between items-center text-sm text-gray-400 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Calendar size={14} />
+                    <span className="tracking-wide">{project.date}</span>
+                  </div>
+                  <Badge
+                    className={`flex items-center gap-1 ${project.status === 'Completed'
+                        ? 'bg-green-600/20 text-green-300 border border-green-500/30'
+                        : 'bg-yellow-400/20 text-yellow-300 border border-yellow-400/30'
+                      }`}
+                  >
+                    {project.status === 'Completed' ? (
+                      <CheckCircle size={14} />
+                    ) : (
+                      <Clock size={14} />
+                    )}
                     {project.status}
                   </Badge>
                 </div>
-                <p className="text-gray-400 text-sm flex items-center gap-1"><Calendar size={14} /> {project.date}</p>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300 text-sm mb-4">{project.description}</p>
+
+                {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, i) => (
-                    <Badge key={i} className="border border-purple-500/50 text-purple-300 hover:bg-purple-500/20">
+                    <Badge
+                      key={i}
+                      className="bg-[#1b1b2f] text-gray-300 border border-gray-600 text-xs"
+                    >
                       {tech}
                     </Badge>
                   ))}
                 </div>
+
+                {/* Buttons */}
                 <div className="flex gap-3">
-                  <Button size="sm" variant="outline" className="flex-1">
-                    <Github size={16} /> View Code
-                  </Button>
-                  <Button size="sm" variant="default" className="flex-1">
-                    <ExternalLink size={16} /> Live Demo
-                  </Button>
+                  <div
+                    className="flex-1"
+                    onClick={(e) => e.stopPropagation()} // 🛑 Prevents bubbling
+                  >
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full bg-[#1c1c2e] text-gray-300 border border-[#333]"
+                      >
+                        <Github size={16} /> View Code
+                      </Button>
+                    </a>
+                  </div>
+                  <div
+                    className="flex-1"
+                    onClick={(e) => e.stopPropagation()} // 🛑 Prevents bubbling
+                  >
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <Button
+                        size="sm"
+                        variant="default"
+                        className="w-full bg-gradient-to-r from-green-400 to-blue-500 text-white hover:brightness-110"
+                      >
+                        <ExternalLink size={16} /> Live Demo
+                      </Button>
+                    </a>
+                  </div>
                 </div>
-              </CardContent>
+
+              </div>
             </motion.div>
           ))}
         </motion.div>

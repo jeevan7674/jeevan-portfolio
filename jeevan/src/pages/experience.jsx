@@ -48,7 +48,7 @@ const WorkExperience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
+    <section id="experience" className="py-20  relative overflow-hidden">
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl animate-pulse"></div>
 

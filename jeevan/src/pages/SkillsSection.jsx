@@ -7,39 +7,74 @@ import {
   SiMongodb, SiMysql, SiMariadb, SiPrisma
 } from 'react-icons/si';
 import { MdApi, MdDevices } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
-const SkillCard = ({ title, skills }) => (
-  <div className="bg-black/30 backdrop-blur-md rounded-2xl p-6 text-center shadow-xl w-full md:w-[30%] border border-white/10">
+const skillCardVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: i => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: 'easeOut' }
+  }),
+};
+
+const SkillCard = ({ title, skills, index }) => (
+  <motion.div
+    custom={index}
+    variants={skillCardVariant}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 text-center shadow-lg w-full md:w-[30%] border border-white/10 transition-all duration-500 hover:shadow-cyan-500/30 hover:border-cyan-400/40"
+  >
     <h3 className="text-white text-xl font-semibold mb-6">{title}</h3>
     <div className="grid grid-cols-3 gap-6 justify-items-center">
       {skills.map((skill, index) => (
-        <div
+        <motion.div
           key={index}
-          className="flex flex-col items-center text-white/90 transition-transform duration-300 hover:scale-110"
+          whileHover={{ scale: 1.15 }}
+          className="flex flex-col items-center text-white/90"
         >
-          <div className={`text-4xl ${skill.color} transition-colors duration-300`}>
+          <motion.div
+            whileInView={{ scale: [0.8, 1], opacity: [0, 1] }}
+            transition={{ duration: 0.4 }}
+            className={`text-4xl ${skill.color}`}
+          >
             {skill.icon}
-          </div>
-          <div className="text-sm mt-2">{skill.name}</div>
-        </div>
+          </motion.div>
+          <div className="text-xs mt-2 font-medium">{skill.name}</div>
+        </motion.div>
       ))}
     </div>
-  </div>
+  </motion.div>
 );
 
 const SkillsSection = () => {
   return (
     <section
       id="skills"
-      className="py-16 px-6 md:px-20 bg-gradient-to-br from-black via-[#0f172a] to-gray-900 text-white"
+      className="relative z-10 py-24 px-6 md:px-20 text-white"
     >
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold">My Skills</h2>
-        <div className="mt-2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full" />
+      <div className="text-center mb-16">
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-extrabold tracking-tight text-white/95"
+        >
+          My Skills
+        </motion.h2>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-4 w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full origin-left"
+        />
       </div>
 
       <div className="flex flex-col md:flex-row justify-center gap-10 flex-wrap">
         <SkillCard
+          index={0}
           title="Frontend Development"
           skills={[
             { name: 'ReactJS', icon: <FaReact />, color: 'text-[#61DBFB]' },
@@ -52,6 +87,7 @@ const SkillsSection = () => {
           ]}
         />
         <SkillCard
+          index={1}
           title="Backend & Database"
           skills={[
             { name: 'Node.js', icon: <FaNodeJs />, color: 'text-[#68A063]' },
@@ -65,6 +101,7 @@ const SkillsSection = () => {
           ]}
         />
         <SkillCard
+          index={2}
           title="Tools & Methodologies"
           skills={[
             { name: 'Git', icon: <FaGitAlt />, color: 'text-[#F1502F]' },

@@ -154,7 +154,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900 overflow-hidden">
+    <section id="contact" className="py-20  overflow-hidden">
       <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} className="container mx-auto px-4">
         <motion.div variants={fadeInUp} className="text-center mb-16 px-4">
           <div className="inline-block px-4 py-2 bg-purple-500/20 rounded-full mb-6">
@@ -193,21 +193,17 @@ const Contact = () => {
               <p className="uppercase tracking-widest text-sm mb-4 sm:mb-6 text-center text-purple-300">Looking for a new talent?</p>
               <TypewriterTextLoop
                 texts={[
-                  'Jeevan Reddy',
                   'r.jeevanreddys680@gmail.com',
-                  'Full Stack Developer',
-                  'UI/UX Designer',
-                  'Open Source Contributor',
                 ]}
               />
               <div className="flex justify-center flex-wrap gap-4 sm:gap-6 text-base mt-4 sm:mt-8">
-                <a href="https://linkedin.com/jeevan-reddy680" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 flex items-center gap-2">
+                <a href="https://linkedin.com/injeevan-reddy680" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 flex items-center gap-2">
                   <LinkedinIcon className="w-5 h-5 text-blue-400" /> LinkedIn
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 flex items-center gap-2">
+                <a href="https://github.com/jeevan7674" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 flex items-center gap-2">
                   <GithubIcon className="w-5 h-5 text-gray-300" /> GitHub
                 </a>
-                <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="hover:text-purple-200 flex items-center gap-2">
+                <a href="https://www.behance.net/jeevanreddy680" target="_blank" rel="noopener noreferrer" className="hover:text-purple-200 flex items-center gap-2">
                   <span className="text-xl font-bold">𝔅</span> Behance
                 </a>
               </div>

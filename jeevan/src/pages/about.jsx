@@ -37,14 +37,14 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white"
+      className="relative min-h-screen flex items-center py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden text-white"
     >
-      {/* Background stars */}
+      {/* Optional background stars */}
       {/* <StarsBackground className="absolute inset-0 z-0" /> */}
 
-      {/* Glowing background orbs (same as experience section) */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse z-0"></div>
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl animate-pulse z-0"></div>
+      {/* Decorative blur circles (matched with Education section) */}
+      <div className="absolute top-0 right-0 w-56 h-56 bg-purple-500/10 rounded-full blur-2xl z-0" />
+      <div className="absolute bottom-0 left-0 w-56 h-56 bg-violet-500/10 rounded-full blur-2xl z-0" />
 
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto w-full">
         <motion.div

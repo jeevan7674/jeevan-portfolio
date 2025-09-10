@@ -50,12 +50,12 @@ const HomePage = () => {
     };
 
     if (isLoading) {
-        return <LoadingScreen isVisible={true} />; // ✅ Centralized Loading Screen
+        return <LoadingScreen isVisible={true} />;
     }
 
     return (
         <>
-            <SplashCursor />
+            {/* <SplashCursor /> */}
 
             <ScrollProgress
                 progressProps={{
@@ -65,11 +65,33 @@ const HomePage = () => {
             />
 
             <motion.div
-                className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative"
+                className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900 text-white"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
             >
+                {/* ✨ Animated Blurred Orbs Across Page ✨ */}
+                <motion.div
+                    className="absolute top-10 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl z-0"
+                    animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.2, 1] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <motion.div
+                    className="absolute bottom-32 right-20 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl z-0"
+                    animate={{ x: [0, -40, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
+                    transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <motion.div
+                    className="absolute top-1/3 left-1/2 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl z-0"
+                    animate={{ x: [0, 40, 0], y: [0, -20, 0], scale: [1, 1.15, 1] }}
+                    transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <motion.div
+                    className="absolute bottom-10 left-1/3 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl z-0"
+                    animate={{ x: [0, 20, 0], y: [0, 20, 0], scale: [1, 1.05, 1] }}
+                    transition={{ duration: 35, repeat: Infinity, ease: 'easeInOut' }}
+                />
+
                 {/* Social Icons */}
                 <motion.div
                     className="hidden md:flex flex-col items-center space-y-4 fixed left-4 bottom-24 z-[999]"
@@ -78,9 +100,9 @@ const HomePage = () => {
                     transition={{ duration: 0.6, delay: 1 }}
                 >
                     {[
-                        { Icon: Github, label: 'Visit my GitHub', link: 'https://github.com/your-username' },
-                        { Icon: Linkedin, label: 'Connect on LinkedIn', link: 'https://linkedin.com/in/your-username' },
-                        { Icon: Mail, label: 'Send me an email', link: 'mailto:your-email@example.com' }
+                        { Icon: Github, label: 'Visit my GitHub', link: 'https://github.com/jeevan7674' },
+                        { Icon: Linkedin, label: 'Connect on LinkedIn', link: 'https://linkedin.com/injeevan-reddy680' },
+                        { Icon: Mail, label: 'Send me an email', link: 'mailto:r.jeevanreddys680@gmail.com' }
                     ].map(({ Icon, label, link }, i) => (
                         <div key={i} className="group relative">
                             <a href={link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">

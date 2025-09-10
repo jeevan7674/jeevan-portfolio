@@ -1,20 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.jsx
+import { Routes, Route } from "react-router-dom";
+import './App.css';
 import HomePage from './pages/mainpage';
-import LoadingScreen from './pages/loading';
+import ProjectDetails from "./pages/projectdetails";
 
 function App() {
   return (
-    <>
-    <div>
-      <HomePage/>
-      <LoadingScreen/>
+    <div className="min-h-screen bg-slate-950">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects/:id" element={<ProjectDetails />} />
+      </Routes>
     </div>
-    </>
   );
 }
 
-
-export default App
+export default App;
