@@ -99,8 +99,8 @@
   status: "Completed",
   description:
     "A responsive website built with HTML, CSS, and JavaScript dedicated to the Art of Living organization.",
-  image: "artofliving1.png",
-  galleryImage: "artofliving1.png",
+  image: "artofliving.png",
+  galleryImage: "artofliving.png",
   goal:
     "To create an informative and visually appealing website for the Art of Living organization, showcasing its programs, events, and initiatives.",
   features: [
