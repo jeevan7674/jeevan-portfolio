@@ -3,48 +3,49 @@ import { Calendar, MapPin, Building } from 'lucide-react';
 
 const WorkExperience = () => {
   const experiences = [
-    {
-      title: "Frontend Developer Intern",
-      company: "Tech Startup Inc.",
-      location: "Ho Chi Minh City, Vietnam",
-      period: "2023 - Present",
-      type: "Part-time",
-      description: [
-        "Developed responsive web components using React and TypeScript",
-        "Collaborated with senior developers on feature implementation",
-        "Participated in code reviews and followed best practices",
-        "Gained experience with modern development tools and workflows"
-      ],
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Git", "Figma"]
-    },
-    {
-      title: "Freelance Web Developer",
-      company: "Self-Employed",
-      location: "Remote",
-      period: "2022 - 2023",
-      type: "Freelance",
-      description: [
-        "Built custom websites for small businesses and individuals",
-        "Implemented responsive designs and optimized for performance",
-        "Worked directly with clients to understand requirements",
-        "Delivered projects on time and within budget"
-      ],
-      technologies: ["HTML", "CSS", "JavaScript", "WordPress", "Bootstrap"]
-    },
-    {
-      title: "University Project Lead",
-      company: "Industrial University of HCMC",
-      location: "Ho Chi Minh City, Vietnam",
-      period: "2021 - 2022",
-      type: "Academic",
-      description: [
-        "Led development of group projects using modern web technologies",
-        "Mentored team members on coding best practices",
-        "Implemented version control and project management workflows",
-        "Delivered successful presentations to faculty and peers"
-      ],
-      technologies: ["React", "Node.js", "MongoDB", "Express", "Material-UI"]
-    }
+  {
+    title: "Product Development Engineer Intern",
+    company: "GenZgalaxy",
+    location: "Remote",
+    period: "2025 - Present",
+    type: "Full-time Internship",
+    description: [
+      "Working as a full-stack developer using the MERN stack",
+      "Building and optimizing scalable product features",
+      "Collaborating with cross-functional teams on product development",
+      "Improving performance and ensuring best coding practices"
+    ],
+    technologies: ["MongoDB", "Express.js", "React", "Node.js", "Git", "Figma"]
+  },
+  {
+    title: "Data Science & Tableau Intern",
+    company: "1M1B (Powered by Salesforce & AICTE)",
+    location: "Remote",
+    period: "April 2025 - June 2025",
+    type: "Internship",
+    description: [
+      "Gained hands-on experience with Tableau for data visualization",
+      "Worked on projects aligned with sustainable development goals",
+      "Explored data science concepts for solving real-world problems",
+      "Collaborated with mentors to create impactful solutions"
+    ],
+    technologies: ["Tableau", "Python", "Pandas", "NumPy", "Data Visualization"]
+  },
+  {
+    title: "Web Development Intern",
+    company: "Vault of Codes",
+    location: "Remote",
+    period: "Jan 2025 - Mar 2025",
+    type: "Internship",
+    description: [
+      "Developed responsive websites using HTML, CSS, and JavaScript",
+      "Built interactive UI components and enhanced user experience",
+      "Improved site performance and optimized code structure",
+      "Delivered client-ready web projects on time"
+    ],
+    technologies: ["HTML", "CSS", "JavaScript", "Bootstrap", "Git"]
+  }
+
   ];
 
   return (
