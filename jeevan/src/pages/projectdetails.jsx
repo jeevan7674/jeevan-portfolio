@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ExternalLink, Github, Calendar, Tag, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Header from './header';
-import projectData from '@/data/projectdata.jsx';
+
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').replace(/\/$/, '');
 
 // ✅ Updated Button Component
 const Button = ({ children, className = '', variant = 'default', ...props }) => {
@@ -42,8 +44,29 @@ const Badge = ({ type, children }) => {
 const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const project = projectData.find((p) => p.id === id);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/public/projects/${id}`);
+        if (!res.ok) {
+          setProject(null);
+          return;
+        }
+        const data = await res.json();
+        setProject(data);
+      } catch {
+        setProject(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [id]);
+
+  if (loading) return <div className="text-white text-center mt-20">Loading project...</div>;
   if (!project) return <div className="text-white text-center mt-20">Project not found</div>;
 
   return (
@@ -119,7 +142,7 @@ const ProjectDetails = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 text-green-400">🚀 Key Features</h2>
             <ul className="grid md:grid-cols-2 gap-x-10 gap-y-3 list-disc list-inside">
-              {project.features.map((feature, index) => (
+              {(project.features || []).map((feature, index) => (
                 <li key={index} className="text-green-300">{feature}</li>
               ))}
             </ul>
@@ -129,7 +152,7 @@ const ProjectDetails = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 text-green-400">🛠 Technologies Used</h2>
             <div className="flex flex-wrap gap-3">
-              {project.technologies.map((tech, index) => (
+              {(project.technologies || []).map((tech, index) => (
                 <span
                   key={index}
                   className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-white border border-slate-600"
@@ -143,17 +166,22 @@ const ProjectDetails = () => {
           {/* Gallery */}
           <div className="text-center mt-10">
             <h2 className="text-2xl font-bold mb-4 text-green-400">🖼 Project Gallery</h2>
-            <motion.div
-              className="inline-block rounded-xl border border-slate-700 shadow-xl overflow-hidden max-w-4xl w-full"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <img
-                src={project.galleryImage || project.image}
-                alt="Project Preview"
-                className="w-full h-auto object-cover"
-              />
-            </motion.div>
+            <div className="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+              {(project.galleryImages?.length ? project.galleryImages : [project.galleryImage || project.image]).map((img, idx) => (
+                <motion.div
+                  key={`${img}-${idx}`}
+                  className="rounded-xl border border-slate-700 shadow-xl overflow-hidden w-full"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img
+                    src={img}
+                    alt={`Project Preview ${idx + 1}`}
+                    className="w-full h-auto object-cover"
+                  />
+                </motion.div>
+              ))}
+            </div>
             <p className="text-sm text-gray-500 mt-2">Gallery preview of the project interface</p>
           </div>
         </motion.div>

@@ -16,7 +16,6 @@
       "Secure user authentication and profile management",
       "Shopping cart and checkout system",
       "Responsive design for desktop and mobile",
-      "Real-time notifications for orders and offers",
     ],
     technologies: ["Next.js", "TailwindCSS", "MongoDB", "Node.js", "Clerk"],
     demo: "https://your-demo-link.com",

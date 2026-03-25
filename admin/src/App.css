@@ -1,0 +1,21 @@
+/* Admin App Styles */
+
+body {
+  font-family: var(--font-body);
+}
+
+.glass-card {
+  background: rgba(hsl(var(--secondary)), 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(var(--border));
+}
+
+.glass-card:hover {
+  background: rgba(hsl(var(--secondary)), 0.6);
+}
+
+@layer components {
+  .text-display {
+    @apply font-display;
+  }
+}
