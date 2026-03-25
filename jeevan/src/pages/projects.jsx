@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api"||"jeevan-portfolio-production.up.railway.app/api").replace(/\/$/, "");
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api").replace(/\/$/, "");
 
 // Button Variants
 const buttonVariants = cva(
