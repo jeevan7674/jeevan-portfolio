@@ -4,6 +4,16 @@ const cloudinary = require("../config/cloudinary");
 const BASE_FOLDER = process.env.CLOUDINARY_FOLDER || "portfolio";
 const RESUME_FOLDER = process.env.CLOUDINARY_RESUME_FOLDER || `${BASE_FOLDER}/resume`;
 
+const buildAttachmentUrl = (url) => {
+  if (!url) return "";
+
+  if (url.includes("/raw/upload/")) {
+    return url.replace("/raw/upload/", "/raw/upload/fl_attachment/");
+  }
+
+  return url;
+};
+
 const cloudinaryUpload = (buffer, originalName) =>
   new Promise((resolve, reject) => {
     const upload = cloudinary.uploader.upload_stream(
@@ -28,7 +38,17 @@ const cloudinaryUpload = (buffer, originalName) =>
 const getResume = async (_req, res) => {
   try {
     const resume = await Resume.findOne({ key: "main" });
-    return res.json(resume || { url: "", downloadUrl: "", uploadedAt: null });
+    if (!resume) {
+      return res.json({ url: "", downloadUrl: "", uploadedAt: null });
+    }
+
+    const downloadUrl = buildAttachmentUrl(resume.url);
+
+    return res.json({
+      url: resume.url,
+      downloadUrl,
+      uploadedAt: resume.uploadedAt,
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -73,21 +93,13 @@ const uploadResume = async (req, res) => {
 const downloadResume = async (_req, res) => {
   try {
     const resume = await Resume.findOne({ key: "main" });
-    if (!resume?.publicId) {
+    if (!resume?.url) {
       return res.status(404).json({ message: "Resume not found" });
     }
 
-    const signedUrl = cloudinary.utils.private_download_url(
-      resume.publicId,
-      "pdf",
-      {
-        resource_type: resume.resourceType || "raw",
-        expires_at: Math.floor(Date.now() / 1000) + 60 * 10,
-        attachment: resume.originalName || "resume.pdf",
-      }
-    );
+    const downloadUrl = buildAttachmentUrl(resume.url);
 
-    return res.json({ downloadUrl: signedUrl });
+    return res.json({ downloadUrl });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

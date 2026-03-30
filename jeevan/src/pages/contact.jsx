@@ -11,6 +11,8 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').replace(/\/$/, '');
+
 // Reusable UI Components
 const Card = ({ className, children, ...props }) => (
   <div className={`rounded-3xl border bg-white/5 shadow-md ${className}`} {...props}>
@@ -90,7 +92,7 @@ const TypewriterTextLoop = ({ texts, typingSpeed = 100, pauseTime = 1500 }) => {
 
   return (
     <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-white cursor-default"
+      className="text-lg sm:text-3xl font-extrabold mb-6 text-center text-white cursor-default max-w-full break-all leading-relaxed px-2"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -115,7 +117,39 @@ const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [resumeUrl, setResumeUrl] = useState('/resume.pdf');
+  const [downloadResumeUrl, setDownloadResumeUrl] = useState('/resume.pdf');
   const { toast } = useToast();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchResume = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/public/resume`);
+        if (!res.ok) {
+          return;
+        }
+
+        const data = await res.json();
+        if (!isMounted) {
+          return;
+        }
+
+        if (data?.url) {
+          setResumeUrl(data.url);
+          setDownloadResumeUrl(data.downloadUrl || data.url.replace('/raw/upload/', '/raw/upload/fl_attachment/'));
+        }
+      } catch (_error) {
+        // Keep static resume fallback when API is unavailable.
+      }
+    };
+
+    fetchResume();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -176,12 +210,12 @@ const Contact = () => {
                 Take a look at my professional experience and skills. You can view it directly in your browser or download a PDF copy for your convenience.
               </p>
               <div className="flex justify-center gap-4 flex-wrap">
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
+                <a href={resumeUrl} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center px-5 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white shadow-md transition-transform transform hover:scale-105 gap-2"
                 >
                   <Eye className="w-5 h-5" /> View Online
                 </a>
-                <a href="/resume.pdf" download
+                <a href={downloadResumeUrl} target="_blank" rel="noopener noreferrer" download
                   className="inline-flex items-center px-5 py-2 rounded-lg text-sm font-medium bg-slate-700 hover:bg-slate-600 text-white border border-slate-500 transition-transform transform hover:scale-105 gap-2"
                 >
                   <DownloadIcon className="w-5 h-5 text-blue-300" /> Download CV (.pdf)

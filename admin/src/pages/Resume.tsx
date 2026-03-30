@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Upload, FileText, Download } from "lucide-react";
+import { Upload, FileText, Download, Eye } from "lucide-react";
 import { resumeAPI } from "@/services/api";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
@@ -39,24 +39,37 @@ const ResumePage = () => {
 
   useEffect(() => { fetchResume(); }, [isDemo]);
 
+  const handleViewOnline = () => {
+    if (!currentResume?.url) {
+      toast({ title: "Error", description: "Resume not available", variant: "destructive" });
+      return;
+    }
+    window.open(currentResume.url, "_blank", "noopener,noreferrer");
+  };
 
-
-  
   const handleDownload = async () => {
-    if (!currentResume) return;
+    if (!currentResume?.url) {
+      toast({ title: "Error", description: "Resume not available", variant: "destructive" });
+      return;
+    }
     try {
       if (isDemo) {
-        if (currentResume.url) window.open(currentResume.url, "_blank", "noopener,noreferrer");
+        window.open(currentResume.url, "_blank", "noopener,noreferrer");
         return;
       }
+      if (currentResume.downloadUrl) {
+        window.open(currentResume.downloadUrl, "_blank", "noopener,noreferrer");
+        return;
+      }
+      // Try to get signed download URL first
       const res = await resumeAPI.download();
       window.open(res.data.downloadUrl, "_blank", "noopener,noreferrer");
     } catch {
-      if (currentResume.url) {
-        window.open(currentResume.url, "_blank", "noopener,noreferrer");
-      } else {
-        toast({ title: "Error", description: "Failed to download resume", variant: "destructive" });
-      }
+      // Fallback to force-download URL if endpoint call fails.
+      const fallbackDownloadUrl = currentResume.url.includes("/raw/upload/")
+        ? currentResume.url.replace("/raw/upload/", "/raw/upload/fl_attachment/")
+        : currentResume.url;
+      window.open(fallbackDownloadUrl, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -104,12 +117,22 @@ const ResumePage = () => {
                   Uploaded {currentResume.uploadedAt ? new Date(currentResume.uploadedAt).toLocaleDateString() : "recently"}
                 </p>
               </div>
-              <button
-                onClick={handleDownload}
-                className="p-2 text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Download size={18} />
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleViewOnline}
+                  title="View resume online"
+                  className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                >
+                  <Eye size={18} />
+                </button>
+                <button
+                  onClick={handleDownload}
+                  title="Download resume"
+                  className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                >
+                  <Download size={18} />
+                </button>
+              </div>
             </div>
 
             <button

@@ -16,6 +16,7 @@ const analyticsRoutes = require("./routes/analyticsRoutes");
 const authRoutes = require("./routes/authRoutes");
 const adminsRoutes = require("./routes/adminsRoutes");
 const publicProjectsRoutes = require("./routes/publicProjectsRoutes");
+const { getResume } = require("./controllers/resumeController");
 const { protect } = require("./middleware/authMiddleware");
 
 const app = express();
@@ -34,6 +35,7 @@ app.get("/", (_req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/admins", adminsRoutes);
 app.use("/api/public/projects", publicProjectsRoutes);
+app.get("/api/public/resume", getResume);
 
 app.use(protect);
 

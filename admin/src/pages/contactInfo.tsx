@@ -102,7 +102,7 @@ const ContactInfoPage = () => {
               <label className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1">
                 <Icon size={12} /> {label}
               </label>
-              <p className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm break-words">
+              <p className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm break-all overflow-hidden">
                 {info[key] || placeholder}
               </p>
             </div>
