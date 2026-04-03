@@ -49,7 +49,14 @@ const Header = () => {
   const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const header = document.querySelector('header');
+      const headerOffset = (header?.offsetHeight ?? 88) + 16;
+      const elementTop = element.getBoundingClientRect().top + window.scrollY;
+
+      window.scrollTo({
+        top: Math.max(0, elementTop - headerOffset),
+        behavior: 'smooth',
+      });
     }
     setIsMenuOpen(false);
   };
