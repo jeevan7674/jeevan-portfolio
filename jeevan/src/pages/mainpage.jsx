@@ -14,14 +14,16 @@ import SplashCursor from '@/components/SplashCursor/SplashCursor';
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import LoadingScreen from './loading';
 
+const MINIMUM_LOADER_DURATION = 8600;
+
 const HomePage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [minimumDelayDone, setMinimumDelayDone] = useState(false);
     const [pageReady, setPageReady] = useState(false);
 
-    // Minimum 5-second timer
+    // Minimum loader duration so all loader stages and name reveal are visible.
     useEffect(() => {
-        const timer = setTimeout(() => setMinimumDelayDone(true), 5000);
+        const timer = setTimeout(() => setMinimumDelayDone(true), MINIMUM_LOADER_DURATION);
         return () => clearTimeout(timer);
     }, []);
 
@@ -38,7 +40,7 @@ const HomePage = () => {
     }, []);
 
 
-    // Finish loading when both ready + 5 sec passed
+    // Finish loading when both the page is ready and the intro delay has elapsed.
     useEffect(() => {
         if (minimumDelayDone && pageReady) {
             setIsLoading(false);
@@ -49,12 +51,12 @@ const HomePage = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    if (isLoading) {
-        return <LoadingScreen isVisible={true} />;
-    }
+    const revealMain = !isLoading;
 
     return (
         <>
+            <LoadingScreen isVisible={isLoading} />
+
             {/* <SplashCursor /> */}
 
             <ScrollProgress
@@ -144,9 +146,28 @@ const HomePage = () => {
                 </div>
 
                 {/* Page Content */}
-                <div className="relative z-10">
-                    <Header />
-                    <Hero />
+                <motion.div
+                    className="relative z-10 origin-center"
+                    initial={{ opacity: 0, scale: 0.965 }}
+                    animate={revealMain ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.965 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: revealMain ? 0.08 : 0 }}
+                >
+                    <motion.div
+                        initial={{ opacity: 0, y: -46 }}
+                        animate={revealMain ? { opacity: 1, y: 0 } : { opacity: 0, y: -46 }}
+                        transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                    >
+                        <Header />
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={revealMain ? { opacity: 1 } : { opacity: 0 }}
+                        transition={{ duration: 0.92, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
+                    >
+                        <Hero />
+                    </motion.div>
+
                     <About />
                     <Education />
                     <Projects />
@@ -154,7 +175,7 @@ const HomePage = () => {
                     <WorkExperience />
                     <Contact />
                     <Footer />
-                </div>
+                </motion.div>
             </motion.div>
         </>
     );

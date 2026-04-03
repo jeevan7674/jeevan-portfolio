@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 import GradientText from '@/components/GradientText/GradientText';
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen overflow-hidden text-white">
+    <section className="relative w-full min-h-[100svh] overflow-hidden pt-24 text-white sm:pt-28">
       {/* Stable Background Stars */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <StarsBackground className="absolute inset-0 opacity-60" />
@@ -11,7 +11,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex min-h-[calc(100svh-6rem)] flex-col items-center justify-center px-4 text-center sm:min-h-[calc(100svh-7rem)] sm:px-6 lg:px-8">
         <h2 className="text-xl sm:text-2xl md:text-3xl text-cyan-300 font-medium mb-3 animate-fade-in">
           Hi, I'm Jeevan!
         </h2>
