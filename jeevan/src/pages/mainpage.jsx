@@ -15,20 +15,36 @@ import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import LoadingScreen from './loading';
 
 const MINIMUM_LOADER_DURATION = 8600;
+const LOADER_PLAYED_KEY = 'jeevan-loader-played';
 
 const HomePage = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [minimumDelayDone, setMinimumDelayDone] = useState(false);
-    const [pageReady, setPageReady] = useState(false);
+    const [shouldPlayLoader] = useState(() => {
+        try {
+            return sessionStorage.getItem(LOADER_PLAYED_KEY) !== 'true';
+        } catch {
+            return true;
+        }
+    });
+    const [isLoading, setIsLoading] = useState(shouldPlayLoader);
+    const [minimumDelayDone, setMinimumDelayDone] = useState(!shouldPlayLoader);
+    const [pageReady, setPageReady] = useState(!shouldPlayLoader);
 
     // Minimum loader duration so all loader stages and name reveal are visible.
     useEffect(() => {
+        if (!shouldPlayLoader) {
+            return undefined;
+        }
+
         const timer = setTimeout(() => setMinimumDelayDone(true), MINIMUM_LOADER_DURATION);
         return () => clearTimeout(timer);
-    }, []);
+    }, [shouldPlayLoader]);
 
     // REALISTIC LOAD HANDLER
     useEffect(() => {
+        if (!shouldPlayLoader) {
+            return undefined;
+        }
+
         const handlePageReady = () => setPageReady(true);
 
         if (document.readyState === 'complete') {
@@ -37,12 +53,17 @@ const HomePage = () => {
             window.addEventListener('load', handlePageReady);
             return () => window.removeEventListener('load', handlePageReady);
         }
-    }, []);
+    }, [shouldPlayLoader]);
 
 
     // Finish loading when both the page is ready and the intro delay has elapsed.
     useEffect(() => {
         if (minimumDelayDone && pageReady) {
+            try {
+                sessionStorage.setItem(LOADER_PLAYED_KEY, 'true');
+            } catch {
+                // Storage can be unavailable in some privacy modes; the loader still works.
+            }
             setIsLoading(false);
         }
     }, [minimumDelayDone, pageReady]);
@@ -50,8 +71,6 @@ const HomePage = () => {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-
-    const revealMain = !isLoading;
 
     return (
         <>
@@ -62,34 +81,34 @@ const HomePage = () => {
             <ScrollProgress
                 progressProps={{
                     className:
-                        'fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-violet-500 transform-gpu z-[9999] shadow-lg shadow-purple-500/50',
+                        'fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-violet-400 transform-gpu z-[9999] shadow-lg shadow-cyan-500/40',
                 }}
             />
 
             <motion.div
-                className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900 text-white"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                className="min-h-screen relative overflow-hidden bg-[radial-gradient(circle_at_top,#0f172a_0%,#020617_48%,#020617_100%)] text-slate-50"
+                initial={{ opacity: isLoading ? 0 : 1 }}
+                animate={{ opacity: isLoading ? 0 : 1 }}
+                transition={{ duration: isLoading ? 0 : 0.45 }}
             >
                 {/* ✨ Animated Blurred Orbs Across Page ✨ */}
                 <motion.div
-                    className="absolute top-10 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl z-0"
+                    className="absolute top-10 left-10 w-72 h-72 bg-cyan-400/10 rounded-full blur-3xl z-0"
                     animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.2, 1] }}
                     transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <motion.div
-                    className="absolute bottom-32 right-20 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl z-0"
+                    className="absolute bottom-32 right-20 w-96 h-96 bg-violet-400/10 rounded-full blur-3xl z-0"
                     animate={{ x: [0, -40, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
                     transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <motion.div
-                    className="absolute top-1/3 left-1/2 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl z-0"
+                    className="absolute top-1/3 left-1/2 w-72 h-72 bg-sky-400/10 rounded-full blur-3xl z-0"
                     animate={{ x: [0, 40, 0], y: [0, -20, 0], scale: [1, 1.15, 1] }}
                     transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <motion.div
-                    className="absolute bottom-10 left-1/3 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl z-0"
+                    className="absolute bottom-10 left-1/3 w-80 h-80 bg-violet-400/10 rounded-full blur-3xl z-0"
                     animate={{ x: [0, 20, 0], y: [0, 20, 0], scale: [1, 1.05, 1] }}
                     transition={{ duration: 35, repeat: Infinity, ease: 'easeInOut' }}
                 />
@@ -103,14 +122,14 @@ const HomePage = () => {
                 >
                     {[
                         { Icon: Github, label: 'Visit my GitHub', link: 'https://github.com/jeevan7674' },
-                        { Icon: Linkedin, label: 'Connect on LinkedIn', link: 'https://linkedin.com/injeevan-reddy680' },
+                        { Icon: Linkedin, label: 'Connect on LinkedIn', link: 'https://linkedin.com/in/jeevan-reddy680' },
                         { Icon: Mail, label: 'Send me an email', link: 'mailto:r.jeevanreddys680@gmail.com' }
                     ].map(({ Icon, label, link }, i) => (
                         <div key={i} className="group relative">
-                            <a href={link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
+                            <a href={link} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-300 transition">
                                 <Icon className="w-6 h-6" />
                             </a>
-                            <span className="absolute left-10 top-1/2 -translate-y-1/2 whitespace-nowrap bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="absolute left-10 top-1/2 -translate-y-1/2 whitespace-nowrap rounded border border-cyan-400/20 bg-slate-950/90 px-2 py-1 text-xs text-slate-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                 {label}
                             </span>
                         </div>
@@ -120,53 +139,40 @@ const HomePage = () => {
                 {/* Scroll to Top */}
                 <motion.button
                     onClick={scrollToTop}
-                    className="hidden md:block fixed right-4 bottom-24 z-[999] p-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full shadow-lg transition-all group"
+                    className="hidden md:block fixed right-4 bottom-24 z-[999] p-2 theme-primary-button rounded-full transition-all group"
                     initial={{ x: 100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1 }}
                     aria-label="Scroll to top"
                 >
                     <ArrowUp className="w-5 h-5" />
-                    <span className="absolute left-[-120%] top-1/2 -translate-y-1/2 whitespace-nowrap bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="absolute left-[-120%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded border border-cyan-400/20 bg-slate-950/90 px-2 py-1 text-xs text-slate-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                         Back to Top
                     </span>
                 </motion.button>
 
                 {/* Background Glow Effects */}
                 <div className="fixed inset-0 pointer-events-none z-0">
-                    <motion.div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"
+                    <motion.div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl"
                         animate={{ x: [0, 100, 0], y: [0, -50, 0], scale: [1, 1.2, 1] }}
                         transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }} />
-                    <motion.div className="absolute top-3/4 right-1/4 w-96 h-96 bg-violet-500/5 rounded-full blur-3xl"
+                    <motion.div className="absolute top-3/4 right-1/4 w-96 h-96 bg-violet-400/5 rounded-full blur-3xl"
                         animate={{ x: [0, -80, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
                         transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }} />
-                    <motion.div className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl"
+                    <motion.div className="absolute top-1/2 left-1/2 w-96 h-96 bg-sky-400/5 rounded-full blur-3xl"
                         animate={{ x: [0, 60, 0], y: [0, -40, 0], scale: [1, 1.15, 1] }}
                         transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }} />
                 </div>
 
                 {/* Page Content */}
-                <motion.div
-                    className="relative z-10 origin-center"
-                    initial={{ opacity: 0, scale: 0.965 }}
-                    animate={revealMain ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.965 }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: revealMain ? 0.08 : 0 }}
-                >
-                    <motion.div
-                        initial={{ opacity: 0, y: -46 }}
-                        animate={revealMain ? { opacity: 1, y: 0 } : { opacity: 0, y: -46 }}
-                        transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                    >
+                <div className="relative z-10">
+                    <div>
                         <Header />
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={revealMain ? { opacity: 1 } : { opacity: 0 }}
-                        transition={{ duration: 0.92, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-                    >
+                    <div>
                         <Hero />
-                    </motion.div>
+                    </div>
 
                     <About />
                     <Education />
@@ -175,7 +181,7 @@ const HomePage = () => {
                     <WorkExperience />
                     <Contact />
                     <Footer />
-                </motion.div>
+                </div>
             </motion.div>
         </>
     );

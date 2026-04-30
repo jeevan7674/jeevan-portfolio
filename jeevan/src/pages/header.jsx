@@ -50,11 +50,12 @@ const Header = () => {
     const element = document.querySelector(href);
     if (element) {
       const header = document.querySelector('header');
-      const headerOffset = (header?.offsetHeight ?? 88) + 16;
-      const elementTop = element.getBoundingClientRect().top + window.scrollY;
+      const target = element.querySelector('.theme-pill, h1, h2') || element;
+      const headerOffset = (header?.offsetHeight ?? 72) + 12;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY;
 
       window.scrollTo({
-        top: Math.max(0, elementTop - headerOffset),
+        top: Math.max(0, targetTop - headerOffset),
         behavior: 'smooth',
       });
     }
@@ -81,8 +82,8 @@ const Header = () => {
     <motion.header
       className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 ${
         scrolled
-          ? 'bg-slate-950/95 backdrop-blur-xl border-b border-purple-500/30 shadow-lg shadow-purple-500/10'
-          : 'bg-slate-950/90 backdrop-blur-md border-b border-purple-500/20'
+          ? 'bg-[#020617]/95 backdrop-blur-xl border-b border-cyan-400/25 shadow-lg shadow-cyan-500/10'
+          : 'bg-[#020617]/88 backdrop-blur-md border-b border-cyan-400/15'
       }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -98,14 +99,14 @@ const Header = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <motion.div
-              className="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-violet-400 bg-clip-text"
+              className="text-2xl font-bold text-transparent bg-gradient-to-r from-cyan-300 via-sky-300 to-violet-300 bg-clip-text"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
               Jeevan Reddy
             </motion.div>
             <motion.div
-              className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-20"
+              className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-lg blur opacity-20"
               animate={{ opacity: [0.2, 0.4, 0.2] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             />
@@ -118,8 +119,8 @@ const Header = () => {
                 key={item.name}
                 aria-label={`Go to ${item.name}`}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative group font-medium text-sm tracking-wide transition-all duration-300 text-gray-300 hover:text-purple-300 focus:outline-none ${
-                  activeSection === item.href ? 'text-purple-400' : ''
+                className={`relative group font-medium text-sm tracking-wide transition-all duration-300 text-slate-300 hover:text-cyan-300 focus:outline-none ${
+                  activeSection === item.href ? 'text-cyan-300' : ''
                 }`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -127,7 +128,7 @@ const Header = () => {
               >
                 {item.name}
                 <span
-                  className={`absolute left-0 -bottom-1 h-0.5 w-full bg-gradient-to-r from-purple-400 to-pink-400 transform transition-transform duration-300 ${
+                  className={`absolute left-0 -bottom-1 h-0.5 w-full bg-gradient-to-r from-cyan-400 to-violet-400 transform transition-transform duration-300 ${
                     activeSection === item.href
                       ? 'scale-x-100'
                       : 'scale-x-0 group-hover:scale-x-100 origin-left'
@@ -147,7 +148,7 @@ const Header = () => {
             <motion.button
               aria-label="Contact section"
               onClick={() => scrollToSection('#contact')}
-              className="bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white px-5 py-2 rounded-full text-sm transition-all duration-300 shadow-md hover:shadow-purple-400/40"
+              className="theme-primary-button px-5 py-2 rounded-full text-sm transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -164,7 +165,7 @@ const Header = () => {
           >
             <motion.button
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              className="text-gray-300 hover:text-purple-400 hover:bg-purple-500/10 p-2 rounded-full transition-all duration-300 focus:outline-none"
+              className="text-slate-300 hover:text-cyan-300 hover:bg-cyan-400/10 p-2 rounded-full transition-all duration-300 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               whileTap={{ scale: 0.95 }}
             >
@@ -177,7 +178,7 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.nav
-              className="lg:hidden mt-4 pb-4 border-t border-purple-500/20"
+              className="lg:hidden mt-4 pb-4 border-t border-cyan-400/15"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -189,8 +190,8 @@ const Header = () => {
                     key={item.name}
                     aria-label={`Go to ${item.name}`}
                     onClick={() => scrollToSection(item.href)}
-                    className={`text-left text-gray-300 hover:text-purple-300 py-2 px-3 relative group font-medium text-sm ${
-                      activeSection === item.href ? 'text-purple-400' : ''
+                    className={`text-left text-slate-300 hover:text-cyan-300 py-2 px-3 relative group font-medium text-sm ${
+                      activeSection === item.href ? 'text-cyan-300' : ''
                     }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -198,7 +199,7 @@ const Header = () => {
                   >
                     {item.name}
                     <span
-                      className={`absolute left-0 bottom-0 h-0.5 w-full bg-gradient-to-r from-purple-400 to-pink-400 transform transition-transform duration-300 ${
+                      className={`absolute left-0 bottom-0 h-0.5 w-full bg-gradient-to-r from-cyan-400 to-violet-400 transform transition-transform duration-300 ${
                         activeSection === item.href
                           ? 'scale-x-100'
                           : 'scale-x-0 group-hover:scale-x-100 origin-left'
@@ -209,7 +210,7 @@ const Header = () => {
                 <motion.button
                   aria-label="Contact section"
                   onClick={() => scrollToSection('#contact')}
-                  className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white py-3 mt-2 rounded-lg text-sm transition-all duration-300"
+                  className="w-full theme-primary-button py-3 mt-2 rounded-lg text-sm transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.7 }}

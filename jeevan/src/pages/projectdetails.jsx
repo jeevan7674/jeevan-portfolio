@@ -11,9 +11,9 @@ const Button = ({ children, className = '', variant = 'default', ...props }) => 
   const baseStyles =
     'inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
   const variants = {
-    default: 'bg-gradient-to-r from-green-400 to-blue-500 text-white hover:brightness-110',
-    outline: 'border border-gray-500 text-gray-300 hover:bg-gray-800',
-    ghost: 'text-gray-300 hover:text-white underline underline-offset-4',
+    default: 'theme-primary-button hover:brightness-110',
+    outline: 'theme-secondary-button',
+    ghost: 'text-slate-300 hover:text-cyan-300 underline underline-offset-4',
   };
   return (
     <button className={`${baseStyles} ${variants[variant]} ${className}`} {...props}>
@@ -25,7 +25,7 @@ const Button = ({ children, className = '', variant = 'default', ...props }) => 
 // ✅ Updated Badge Component with Icons
 const Badge = ({ type, children }) => {
   const baseStyles =
-    'inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#1b1e2b]/80 text-teal-300 border border-teal-500 backdrop-blur-sm shadow-sm';
+    'inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-cyan-400/10 text-cyan-200 border border-cyan-400/20 backdrop-blur-sm shadow-sm';
 
   const icons = {
     category: <Tag size={14} />,
@@ -74,7 +74,7 @@ const ProjectDetails = () => {
       <Header />
 
       <motion.section
-        className="min-h-screen pt-32 pb-16 px-6 md:px-20 bg-gradient-to-br from-[#0f0f1a] to-[#12121c] text-white"
+        className="min-h-screen pt-32 pb-16 px-6 md:px-20 bg-[radial-gradient(circle_at_top,#0f172a_0%,#020617_48%,#020617_100%)] text-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
@@ -98,7 +98,7 @@ const ProjectDetails = () => {
               <Badge type="status">{project.status}</Badge>
             </div>
 
-            <p className="text-gray-300 max-w-2xl text-base">{project.description}</p>
+            <p className="text-slate-300 max-w-2xl text-base">{project.description}</p>
 
             <div className="flex flex-wrap gap-4 mt-4">
               <Button onClick={() => window.open(project.demo, '_blank')}>
@@ -117,7 +117,7 @@ const ProjectDetails = () => {
           <motion.img
             src={project.image}
             alt={project.title}
-            className="rounded-xl w-full max-w-lg border border-slate-700 shadow-2xl"
+            className="rounded-xl w-full max-w-lg border border-cyan-400/15 shadow-2xl"
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -134,28 +134,28 @@ const ProjectDetails = () => {
         >
           {/* Goal */}
           <div>
-            <h2 className="text-2xl font-bold mb-2 text-green-400">🎯 Project Goal & Overview</h2>
-            <p className="text-gray-300 max-w-4xl leading-relaxed">{project.goal}</p>
+            <h2 className="text-2xl font-bold mb-2 text-cyan-300">🎯 Project Goal & Overview</h2>
+            <p className="text-slate-300 max-w-4xl leading-relaxed">{project.goal}</p>
           </div>
 
           {/* Features */}
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-green-400">🚀 Key Features</h2>
+            <h2 className="text-2xl font-bold mb-4 text-cyan-300">🚀 Key Features</h2>
             <ul className="grid md:grid-cols-2 gap-x-10 gap-y-3 list-disc list-inside">
               {(project.features || []).map((feature, index) => (
-                <li key={index} className="text-green-300">{feature}</li>
+                <li key={index} className="text-slate-300 marker:text-cyan-300">{feature}</li>
               ))}
             </ul>
           </div>
 
           {/* Technologies */}
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-green-400">🛠 Technologies Used</h2>
+            <h2 className="text-2xl font-bold mb-4 text-cyan-300">🛠 Technologies Used</h2>
             <div className="flex flex-wrap gap-3">
               {(project.technologies || []).map((tech, index) => (
                 <span
                   key={index}
-                  className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-white border border-slate-600"
+                  className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-slate-900/80 text-slate-200 border border-cyan-400/15"
                 >
                   {tech}
                 </span>
@@ -165,12 +165,12 @@ const ProjectDetails = () => {
 
           {/* Gallery */}
           <div className="text-center mt-10">
-            <h2 className="text-2xl font-bold mb-4 text-green-400">🖼 Project Gallery</h2>
+            <h2 className="text-2xl font-bold mb-4 text-cyan-300">🖼 Project Gallery</h2>
             <div className="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">
               {(project.galleryImages?.length ? project.galleryImages : [project.galleryImage || project.image]).map((img, idx) => (
                 <motion.div
                   key={`${img}-${idx}`}
-                  className="rounded-xl border border-slate-700 shadow-xl overflow-hidden w-full"
+                  className="rounded-xl border border-cyan-400/15 shadow-xl overflow-hidden w-full"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -182,7 +182,7 @@ const ProjectDetails = () => {
                 </motion.div>
               ))}
             </div>
-            <p className="text-sm text-gray-500 mt-2">Gallery preview of the project interface</p>
+            <p className="text-sm text-slate-500 mt-2">Gallery preview of the project interface</p>
           </div>
         </motion.div>
 
@@ -193,7 +193,7 @@ const ProjectDetails = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <p className="text-gray-400 mb-4">✨ Thank you for checking out this project!</p>
+          <p className="text-slate-400 mb-4">✨ Thank you for checking out this project!</p>
           <Button onClick={() => navigate(-1)} variant="ghost">
             ← Back to Projects
           </Button>
