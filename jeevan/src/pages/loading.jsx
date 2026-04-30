@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { StarsBackground } from '@/components/animate-ui/backgrounds/stars';
 
 const SYSTEM_MESSAGES = [
   'Booting Jeevan.dev',
@@ -21,14 +22,23 @@ const LoadingScreen = ({ isVisible }) => {
   const [progress, setProgress] = useState(18);
   const [showDebug, setShowDebug] = useState(false);
 
-  const brandLetters = useMemo(
+  const brandWords = useMemo(
     () => [
-      { value: 'J', accent: false },
-      { value: 'E', accent: false },
-      { value: 'E', accent: false },
-      { value: 'V', accent: true },
-      { value: 'A', accent: false },
-      { value: 'N', accent: false },
+      [
+        { value: 'J' },
+        { value: 'E' },
+        { value: 'E' },
+        { value: 'V', accent: true },
+        { value: 'A' },
+        { value: 'N' },
+      ],
+      [
+        { value: 'R' },
+        { value: 'E' },
+        { value: 'D', accent: true },
+        { value: 'D', accent: true },
+        { value: 'Y' },
+      ],
     ],
     []
   );
@@ -103,16 +113,26 @@ const LoadingScreen = ({ isVisible }) => {
     filter: 'blur(10px)',
   });
 
+  const getLetterStyle = (letter) =>
+    letter.accent
+      ? {
+        backgroundImage: 'linear-gradient(135deg, #22d3ee 0%, #38bdf8 45%, #a78bfa 100%)',
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
+        color: 'transparent',
+        textShadow: '0 0 28px rgba(168,85,247,0.28)',
+      }
+      : {
+        color: '#f8fafc',
+        textShadow: '0 0 22px rgba(255,255,255,0.11)',
+      };
+
   return (
     <AnimatePresence>
       {renderOverlay && (
         <motion.div
           className="fixed inset-0 z-[99999] overflow-hidden text-white"
-          style={{
-            background:
-              'radial-gradient(circle at 14% 18%, rgba(45,212,191,0.12), transparent 30%), radial-gradient(circle at 82% 80%, rgba(168,85,247,0.12), transparent 32%), linear-gradient(135deg, #0b1020 0%, #18192b 55%, #090d18 100%)',
-          }}
-          initial={{ opacity: 0, scale: 1.02, filter: 'blur(0px)' }}
+          initial={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           animate={
             isExiting
               ? { opacity: 0, scale: 0.965, filter: 'blur(14px)' }
@@ -121,37 +141,40 @@ const LoadingScreen = ({ isVisible }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: isExiting ? 0.7 : 0.45, ease: 'easeInOut' }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_45%)] opacity-55" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(91,103,145,0.16)_1px,transparent_1px),linear-gradient(to_bottom,rgba(91,103,145,0.14)_1px,transparent_1px)] bg-[length:clamp(5rem,9vw,8rem)_clamp(5rem,9vw,8rem)] opacity-35" />
+          <div className="absolute inset-0 z-0 overflow-hidden bg-[radial-gradient(circle_at_top,#0f172a_0%,#020617_48%,#020617_100%)]">
+            <StarsBackground className="absolute inset-0 opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/30 to-black" />
+            <div className="absolute bottom-0 left-1/2 h-[150px] w-[150vw] -translate-x-1/2 rounded-t-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-400 via-sky-500 to-violet-500 opacity-35 blur-3xl sm:h-[180px] md:h-[200px]" />
+            <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-cyan-300/10 to-transparent" />
+          </div>
           <motion.div
-            className="pointer-events-none absolute inset-0"
-            animate={{ opacity: [0.18, 0.28, 0.18] }}
+            className="pointer-events-none absolute inset-0 z-0"
+            animate={{ opacity: [0.2, 0.34, 0.2] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               background:
-                'radial-gradient(42rem 22rem at 50% 50%, rgba(45,212,191,0.12), transparent 70%), radial-gradient(20rem 12rem at 50% 50%, rgba(168,85,247,0.08), transparent 72%)',
+                'radial-gradient(42rem 22rem at 50% 50%, rgba(34,211,238,0.12), transparent 70%), radial-gradient(34rem 18rem at 52% 52%, rgba(56,189,248,0.1), transparent 72%), radial-gradient(24rem 14rem at 50% 60%, rgba(167,139,250,0.09), transparent 75%)',
             }}
           />
 
-          <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
-            <div className="w-full max-w-5xl text-center">
+          <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-8 sm:px-6">
+            <div className="w-full max-w-6xl text-center">
               <motion.div
-                className="mx-auto flex w-fit items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[0.66rem] uppercase tracking-[0.32em] text-slate-300/80 backdrop-blur-sm sm:text-[0.72rem]"
+                className="mx-auto flex max-w-full w-fit items-center justify-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/[0.05] px-3 py-2 text-[0.62rem] uppercase tracking-[0.18em] text-slate-200/85 shadow-[0_0_40px_rgba(34,211,238,0.1)] backdrop-blur-md sm:gap-3 sm:px-4 sm:text-[0.72rem] sm:tracking-[0.32em]"
                 style={{ fontFamily: '"Geist Mono", "JetBrains Mono", monospace' }}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
               >
                 <motion.span
-                  className="h-1.5 w-1.5 rounded-full bg-cyan-300"
+                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300"
                   animate={{ opacity: [0.35, 1, 0.35], scale: [1, 1.2, 1] }}
                   transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <span>Initializing Portfolio</span>
-                <span>{String(progress).padStart(2, '0')}%</span>
               </motion.div>
 
-              <div className="mx-auto mt-10 min-h-[17rem] w-full max-w-5xl text-center sm:min-h-[18rem]">
+              <div className="mx-auto mt-8 min-h-[17rem] w-full max-w-6xl text-center sm:mt-10 sm:min-h-[18rem]">
                 <AnimatePresence mode="wait">
                   {!showName ? (
                     <motion.div
@@ -162,9 +185,9 @@ const LoadingScreen = ({ isVisible }) => {
                       transition={{ duration: 0.35, ease: 'easeOut' }}
                       className="space-y-8 pt-10"
                     >
-                      <div className="mx-auto flex h-[clamp(8rem,20vw,12rem)] max-w-[min(92vw,56rem)] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] px-5 shadow-[0_0_70px_rgba(34,211,238,0.08)] backdrop-blur-md">
+                      <div className="mx-auto flex min-h-[clamp(8rem,30vw,12rem)] max-w-[min(92vw,56rem)] items-center justify-center overflow-hidden rounded-2xl border border-cyan-400/15 bg-slate-950/45 px-4 py-6 shadow-[0_0_70px_rgba(34,211,238,0.12)] backdrop-blur-md sm:px-5">
                         <div
-                          className="grid w-full gap-2 text-left"
+                          className="grid w-full gap-3 text-left"
                           style={{ fontFamily: '"Geist Mono", "JetBrains Mono", monospace' }}
                         >
                           {SYSTEM_MESSAGES.slice(0, messageIndex + 1).map((message, index) => {
@@ -174,11 +197,11 @@ const LoadingScreen = ({ isVisible }) => {
                             return (
                               <motion.p
                                 key={message}
-                                className={`text-sm uppercase tracking-[0.18em] sm:text-base ${isActive ? 'text-slate-100' : isDone ? 'text-cyan-300/90' : 'text-slate-500'}`}
+                                className={`text-xs uppercase tracking-[0.12em] sm:text-sm sm:tracking-[0.18em] md:text-base ${isActive ? 'text-slate-100' : isDone ? 'text-cyan-300/90' : 'text-slate-500'}`}
                                 animate={isActive ? { opacity: [0.65, 1, 0.65] } : { opacity: 1 }}
                                 transition={isActive ? { duration: 1, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.2 }}
                               >
-                                <span className={`mr-3 inline-block w-4 ${isActive ? 'text-cyan-300' : 'text-cyan-300/90'}`}>
+                                <span className={`mr-2 inline-block w-4 sm:mr-3 ${isActive ? 'text-cyan-300' : 'text-cyan-300/90'}`}>
                                   {isDone ? 'OK' : '>'}
                                 </span>
                                 {message}
@@ -192,21 +215,6 @@ const LoadingScreen = ({ isVisible }) => {
                               </motion.p>
                             );
                           })}
-                        </div>
-                      </div>
-
-                      <div className="mx-auto w-full max-w-xl">
-                        <div className="relative h-2 overflow-hidden rounded-full bg-white/10">
-                          <motion.div
-                            className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-cyan-400 via-teal-300 to-violet-400"
-                            animate={{ width: `${progress}%` }}
-                            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                          />
-                          <motion.div
-                            className="absolute inset-y-0 w-24 rounded-full bg-gradient-to-r from-transparent via-white/60 to-transparent blur-sm"
-                            animate={{ x: ['-20%', '520%'] }}
-                            transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
-                          />
                         </div>
                       </div>
                     </motion.div>
@@ -226,9 +234,9 @@ const LoadingScreen = ({ isVisible }) => {
                       }
                       className="pt-6 text-center"
                     >
-                      <div className="relative mx-auto w-fit">
+                      <div className="relative mx-auto w-full">
                         <motion.div
-                          className="relative inline-flex items-end justify-center gap-[0.02em] overflow-hidden px-2"
+                          className="relative mx-auto flex max-w-full flex-wrap items-end justify-center gap-x-[0.24em] gap-y-3 overflow-visible px-1 sm:gap-x-[0.32em]"
                           style={{ fontFamily: '"Sora", "Manrope", sans-serif' }}
                           initial="hidden"
                           animate="visible"
@@ -242,23 +250,30 @@ const LoadingScreen = ({ isVisible }) => {
                             },
                           }}
                         >
-                          {brandLetters.map((letter, idx) => (
-                            <motion.span
-                              key={`${letter.value}-${idx}`}
-                              className={`relative inline-block text-[clamp(4.6rem,18vw,10rem)] font-black uppercase leading-none tracking-[-0.08em] sm:tracking-[-0.06em] ${letter.accent ? 'text-cyan-400' : 'text-white'}`}
-                              variants={{
-                                hidden: getLetterVariant(idx),
-                                visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-                              }}
-                              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                              style={{
-                                textShadow: letter.accent
-                                  ? '0 0 22px rgba(34,211,238,0.22)'
-                                  : '0 0 20px rgba(255,255,255,0.05)',
-                              }}
+                          {brandWords.map((word, wordIndex) => (
+                            <span
+                              key={`word-${wordIndex}`}
+                              className="inline-flex shrink-0 items-end justify-center"
                             >
-                              {letter.value}
-                            </motion.span>
+                              {word.map((letter, letterIndex) => {
+                                const itemIndex = wordIndex * 6 + letterIndex;
+
+                                return (
+                                  <motion.span
+                                    key={`${letter.value}-${wordIndex}-${letterIndex}`}
+                                    className="relative inline-block text-[clamp(2.55rem,13vw,5.75rem)] font-black uppercase leading-none tracking-normal sm:text-[clamp(3.4rem,9.5vw,5.9rem)]"
+                                    variants={{
+                                      hidden: getLetterVariant(itemIndex),
+                                      visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+                                    }}
+                                    transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                                    style={getLetterStyle(letter)}
+                                  >
+                                    {letter.value}
+                                  </motion.span>
+                                );
+                              })}
+                            </span>
                           ))}
                         </motion.div>
 
@@ -277,7 +292,7 @@ const LoadingScreen = ({ isVisible }) => {
                       />
 
                       <motion.div
-                        className="mt-6 flex flex-wrap items-center justify-center gap-3 text-[0.66rem] uppercase tracking-[0.48em] text-slate-400 sm:text-[0.72rem]"
+                        className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[0.62rem] uppercase tracking-[0.28em] text-slate-400 sm:text-[0.72rem] sm:tracking-[0.48em]"
                         style={{ fontFamily: '"Geist Mono", "JetBrains Mono", monospace' }}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -286,13 +301,13 @@ const LoadingScreen = ({ isVisible }) => {
                         {taglineItems.map((item, index) => (
                           <div key={item} className="flex items-center gap-3">
                             <span>{item}</span>
-                            {index < taglineItems.length - 1 ? <span className="text-cyan-300/45">.</span> : null}
+                            {index < taglineItems.length - 1 ? <span className="text-violet-300/55">.</span> : null}
                           </div>
                         ))}
                       </motion.div>
 
                       <motion.p
-                        className="mt-5 text-[0.72rem] uppercase tracking-[0.22em] text-cyan-200/75 sm:text-xs"
+                        className="mt-5 text-[0.66rem] uppercase tracking-[0.16em] text-cyan-100/75 sm:text-xs sm:tracking-[0.22em]"
                         style={{ fontFamily: '"Geist Mono", "JetBrains Mono", monospace' }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}

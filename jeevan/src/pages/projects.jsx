@@ -10,14 +10,14 @@ const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/ap
 
 // Button Variants
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:shadow-md",
+          "theme-primary-button hover:shadow-md",
         outline:
-          "border border-purple-500 text-purple-300 hover:bg-purple-600/10",
+          "theme-secondary-button",
       },
       size: {
         default: "h-10 px-4",
@@ -113,11 +113,11 @@ const Projects = () => {
         {/* HERO SECTION */}
         <div className="text-center mb-14">
           <motion.div
-            className="inline-block px-4 py-2 bg-[#1c1c2e] rounded-full mb-4 border border-[#2a2a40]"
+            className="theme-pill inline-block px-4 py-2 rounded-full mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <span className="text-teal-400 text-sm font-medium tracking-widest">
+            <span className="text-sm font-medium tracking-widest">
               Portfolio Showcase
             </span>
           </motion.div>
@@ -127,11 +127,11 @@ const Projects = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="text-teal-400">Selected</span> Projects
+            <span className="text-cyan-300">Selected</span> Projects
           </motion.h1>
 
           <motion.p
-            className="text-gray-400 max-w-xl mx-auto mb-8"
+            className="text-slate-400 max-w-xl mx-auto mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -140,13 +140,13 @@ const Projects = () => {
 
           {/* SEARCH BAR */}
           <div className="max-w-xl mx-auto mb-6 relative">
-            <Search className="absolute left-3 top-3.5 text-gray-400" size={18} />
+            <Search className="absolute left-3 top-3.5 text-slate-400" size={18} />
             <input
               type="text"
               placeholder="Search projects, technologies..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#1c1c2e] border border-[#2a2a40] text-white placeholder-gray-400 focus:outline-none focus:border-teal-400 transition"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900/70 border border-cyan-400/15 text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-300 transition"
             />
           </div>
 
@@ -155,7 +155,7 @@ const Projects = () => {
 
             {/* Project Type */}
             <div>
-              <p className="text-sm text-gray-400 mb-3 text-center md:text-left">
+              <p className="text-sm text-slate-400 mb-3 text-center md:text-left">
                 Project Type
               </p>
 
@@ -165,8 +165,8 @@ const Projects = () => {
                     key={filter}
                     onClick={() => setSelectedType(filter)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${selectedType === filter
-                        ? "bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-md"
-                        : "bg-[#1c1c2e] text-gray-300 hover:bg-[#292944]"
+                        ? "bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md shadow-cyan-500/20"
+                        : "bg-slate-900/70 text-slate-300 border border-cyan-400/10 hover:bg-slate-800"
                       }`}
                   >
                     {filter}
@@ -177,7 +177,7 @@ const Projects = () => {
 
             {/* Technology */}
             <div>
-              <p className="text-sm text-gray-400 mb-3 text-center md:text-left">
+              <p className="text-sm text-slate-400 mb-3 text-center md:text-left">
                 Technology
               </p>
 
@@ -187,8 +187,8 @@ const Projects = () => {
                     key={tech}
                     onClick={() => setSelectedTech(tech)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${selectedTech === tech
-                        ? "bg-gradient-to-r from-teal-400 to-blue-500 text-white shadow-md"
-                        : "bg-[#1c1c2e] text-gray-300 hover:bg-[#292944]"
+                        ? "bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md shadow-cyan-500/20"
+                        : "bg-slate-900/70 text-slate-300 border border-cyan-400/10 hover:bg-slate-800"
                       }`}
                   >
                     {tech}
@@ -205,7 +205,7 @@ const Projects = () => {
         {loading ? (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="rounded-2xl bg-[#10101A] border border-[#1c1c2b] min-h-[380px] animate-pulse" />
+              <div key={i} className="theme-panel rounded-2xl min-h-[380px] animate-pulse" />
             ))}
           </div>
         ) : filteredProjects.length > 0 ? (
@@ -225,7 +225,7 @@ const Projects = () => {
                 whileHover={{ y: -6, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 200 }}
                 onClick={() => navigate(`/projects/${project.id}`)}
-                className="cursor-pointer rounded-2xl overflow-hidden bg-[#10101A] text-white flex flex-col shadow-md border border-[#1c1c2b] min-h-[480px] hover:shadow-teal-500/20 transition"
+                className="theme-panel cursor-pointer rounded-2xl overflow-hidden text-white flex flex-col min-h-[480px] hover:border-cyan-300/35 hover:shadow-cyan-500/15 transition"
               >
                 {/* Image */}
                 <div className="w-full h-[200px]">
@@ -238,22 +238,22 @@ const Projects = () => {
 
                 {/* Content */}
                 <div className="p-6 flex flex-col flex-grow justify-between">
-                  <h3 className="text-xl font-bold text-teal-400 mb-1 tracking-tight">
+                  <h3 className="text-xl font-bold text-cyan-300 mb-1 tracking-tight">
                     {project.title}
                   </h3>
 
-                  <p className="text-gray-400 text-sm mb-4 tracking-wide">
+                  <p className="text-slate-400 text-sm mb-4 tracking-wide">
                     {project.description}
                   </p>
 
                   {/* Duration + Role */}
-                  <div className="flex justify-between items-center text-sm text-gray-400 mb-4">
+                  <div className="flex justify-between items-center text-sm text-slate-400 mb-4">
                     <div className="flex items-center gap-2">
                       <Calendar size={14} />
                       <span>{project.date || "Ongoing"}</span>
                     </div>
 
-                    <Badge className="bg-teal-600/20 text-teal-300 border border-teal-500/30">
+                    <Badge className="bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/25">
                       {project.status}
                     </Badge>
                   </div>
@@ -263,7 +263,7 @@ const Projects = () => {
                     {(project.technologies || []).map((tech, i) => (
                       <Badge
                         key={i}
-                        className="bg-[#1b1b2f] text-gray-300 border border-gray-600 text-xs"
+                        className="bg-slate-900/80 text-slate-300 border border-cyan-400/10 text-xs"
                       >
                         {tech}
                       </Badge>
@@ -286,7 +286,7 @@ const Projects = () => {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="w-full bg-[#1c1c2e] text-gray-300 border border-[#333]"
+                            className="w-full bg-slate-900/80 text-slate-300 border border-violet-400/30 hover:bg-violet-400/10"
                           >
                             <Github size={16} /> View Code
                           </Button>
@@ -308,7 +308,7 @@ const Projects = () => {
                           <Button
                             size="sm"
                             variant="default"
-                            className="w-full bg-gradient-to-r from-green-400 to-blue-500 text-white hover:brightness-110"
+                            className="w-full theme-primary-button hover:brightness-110"
                           >
                             <ExternalLink size={16} /> Live Demo
                           </Button>
@@ -323,7 +323,7 @@ const Projects = () => {
         ) : (
           // EMPTY STATE
           <div className="text-center py-20">
-            <p className="text-gray-400 text-lg">No projects found</p>
+            <p className="text-slate-400 text-lg">No projects found</p>
             <button
               onClick={() => {
                 setSelectedType("All");
@@ -331,7 +331,7 @@ const Projects = () => {
                 setSearchQuery("");
               }}
 
-              className="mt-4 px-4 py-2 bg-teal-500 rounded-lg text-white hover:bg-teal-600"
+              className="mt-4 px-4 py-2 theme-primary-button rounded-lg"
             >
               Clear Filters
             </button>

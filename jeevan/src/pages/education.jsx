@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 
 // Reusable UI Components
 const Card = ({ className, children }) => (
-  <div className={`rounded-2xl border bg-white/5 border-purple-500/20 shadow-lg transition-all duration-300 ${className}`}>
+  <div className={`theme-panel rounded-2xl transition-all duration-300 ${className}`}>
     {children}
   </div>
 );
 
 const CardHeader = ({ children }) => (
-  <div className="p-5 border-b border-purple-500/20">{children}</div>
+  <div className="p-5 border-b border-cyan-400/15">{children}</div>
 );
 
 const CardTitle = ({ children, className }) => (
@@ -23,8 +23,8 @@ const CardContent = ({ children }) => (
 const Badge = ({ children, className = '', variant }) => (
   <span className={`inline-block rounded-full px-3 py-1 text-sm font-medium border
     ${variant === 'outline'
-      ? 'bg-transparent border-purple-400/50 text-purple-300'
-      : 'bg-purple-600/20 text-purple-200 border-purple-600/30'}
+      ? 'bg-transparent border-violet-400/50 text-violet-200'
+      : 'bg-cyan-400/10 text-cyan-200 border-cyan-400/20'}
     ${className}`}>{children}
   </span>
 );
@@ -109,19 +109,19 @@ const Education = () => {
       className="py-20 relative overflow-hidden"
     >
       {/* Decorative Blur Circles */}
-      <div className="absolute top-0 right-0 w-56 h-56 bg-purple-500/10 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-0 left-0 w-56 h-56 bg-violet-500/10 rounded-full blur-2xl"></div>
+      <div className="absolute top-0 right-0 w-56 h-56 bg-cyan-400/10 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-0 left-0 w-56 h-56 bg-violet-400/10 rounded-full blur-2xl"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}>
 
           {/* Section Header */}
           <motion.div variants={fadeInUp} className="text-center mb-14">
-            <div className="inline-block px-4 py-2 bg-purple-500/20 rounded-full mb-4">
-              <span className="text-purple-400 text-sm font-medium">Academic Background</span>
+            <div className="theme-pill inline-block px-4 py-2 rounded-full mb-4">
+              <span className="text-sm font-medium">Academic Background</span>
             </div>
             <h2 className="text-4xl font-bold text-white mb-3">Education & Activities</h2>
-            <div className="w-24 h-1 mx-auto bg-gradient-to-r from-purple-400 to-violet-400" />
+            <div className="w-24 h-1 mx-auto theme-section-line" />
           </motion.div>
 
           {/* Education & Activities */}
@@ -129,21 +129,21 @@ const Education = () => {
             {/* Education Column */}
             <div>
               <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
-                <GraduationCap className="mr-3 h-6 w-6 text-purple-400" /> Education
+                <GraduationCap className="mr-3 h-6 w-6 text-cyan-300" /> Education
               </h3>
               <div className="space-y-6">
                 {education.map((edu, index) => (
                   <motion.div key={index} custom={index} variants={fadeInUp}>
-                    <Card className="hover:bg-slate-800/70 bg-slate-800/50 backdrop-blur-sm">
+                    <Card className="hover:bg-slate-800/70">
                       <CardHeader>
                         <CardTitle>{edu.degree}</CardTitle>
-                        <div className="flex items-center text-sm text-gray-400 mt-1">
+                        <div className="flex items-center text-sm text-slate-400 mt-1">
                           <Calendar className="mr-2 h-4 w-4" /> {edu.period}
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-purple-300 font-medium mb-2">{edu.school}</p>
-                        <p className="text-gray-300 text-sm mb-2">{edu.description}</p>
+                        <p className="text-cyan-300 font-medium mb-2">{edu.school}</p>
+                        <p className="text-slate-300 text-sm mb-2">{edu.description}</p>
                         <Badge>GPA: {edu.gpa}</Badge>
                       </CardContent>
                     </Card>
@@ -155,20 +155,20 @@ const Education = () => {
             {/* Activities Column */}
             <div>
               <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
-                <Award className="mr-3 h-6 w-6 text-violet-400" /> Activities & Achievements
+                <Award className="mr-3 h-6 w-6 text-violet-300" /> Activities & Achievements
               </h3>
               <div className="space-y-6">
                 {activities.map((activity, index) => (
                   <motion.div key={index} custom={index} variants={fadeInUp}>
-                    <Card className="hover:bg-slate-800/70 bg-slate-800/50 backdrop-blur-sm">
+                    <Card className="hover:bg-slate-800/70">
                       <CardHeader>
                         <CardTitle>{activity.title}</CardTitle>
-                        <div className="flex items-center text-sm text-gray-400 mt-1">
+                        <div className="flex items-center text-sm text-slate-400 mt-1">
                           <Calendar className="mr-2 h-4 w-4" /> {activity.period}
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-gray-300 text-sm">{activity.description}</p>
+                        <p className="text-slate-300 text-sm">{activity.description}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -185,7 +185,7 @@ const Education = () => {
                 <Badge
                   key={index}
                   variant="outline"
-                  className="hover:bg-purple-500/20 transition-all duration-300"
+                  className="hover:bg-violet-400/15 transition-all duration-300"
                 >
                   {cert}
                 </Badge>

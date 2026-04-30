@@ -15,7 +15,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#020617] text-slate-50;
     margin: 0;
     min-width: 320px;
   }
@@ -120,7 +120,29 @@
 
 /* Docs note */
 .read-the-docs {
-  color: #888;
+  color: #94a3b8;
+}
+
+@layer components {
+  .theme-panel {
+    @apply border border-cyan-400/15 bg-slate-900/55 shadow-[0_18px_60px_rgba(2,6,23,0.35)] backdrop-blur-md;
+  }
+
+  .theme-pill {
+    @apply border border-cyan-400/20 bg-cyan-400/10 text-cyan-200;
+  }
+
+  .theme-section-line {
+    @apply bg-gradient-to-r from-cyan-400 via-sky-400 to-violet-400;
+  }
+
+  .theme-primary-button {
+    @apply bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-300 hover:to-sky-300;
+  }
+
+  .theme-secondary-button {
+    @apply border border-violet-400/50 bg-violet-400/10 text-violet-100 hover:bg-violet-400/15;
+  }
 }
 
 /* Gradient animation utility */

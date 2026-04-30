@@ -8,6 +8,7 @@ import {
   SiMongodb, SiMysql, SiMariadb, SiPrisma
 } from 'react-icons/si';
 import { MdApi, MdDevices } from 'react-icons/md';
+import { Cpu, Layers3, Terminal } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { Radar, IconContainer } from '@/components/ui/radar-effect';
 
@@ -22,6 +23,44 @@ const categories = [
   { key: 'tools', label: 'Tools' },
   { key: 'languages', label: 'Languages' },
 ];
+
+const categoryMeta = {
+  all: {
+    title: 'Full Stack Scan',
+    command: 'scan --stack=all --depth=production',
+    description: 'A combined map of the tools I use to design, build, ship, and maintain modern products.',
+  },
+  frontend: {
+    title: 'Interface Layer',
+    command: 'scan --layer=frontend --focus=ux',
+    description: 'React-driven interfaces, responsive systems, stateful components, and polished interaction design.',
+  },
+  backend: {
+    title: 'Service Layer',
+    command: 'scan --layer=backend --focus=apis',
+    description: 'Server logic, API contracts, authentication flows, and scalable application foundations.',
+  },
+  app: {
+    title: 'Product Surface',
+    command: 'scan --target=app --mode=cross-platform',
+    description: 'Web and mobile experiences shaped around usability, performance, and user intent.',
+  },
+  database: {
+    title: 'Data Layer',
+    command: 'scan --layer=data --integrity=on',
+    description: 'Schemas, persistence, queries, and database choices that keep product behavior reliable.',
+  },
+  tools: {
+    title: 'Workflow Tools',
+    command: 'scan --toolchain=developer --speed=fast',
+    description: 'Design, version control, deployment, containers, and utilities that make shipping smoother.',
+  },
+  languages: {
+    title: 'Language Core',
+    command: 'scan --syntax=languages --runtime=mixed',
+    description: 'Programming languages I use to reason about product logic from frontend to backend.',
+  },
+};
 
 const allSkills = [
   { name: 'ReactJS', icon: <FaReact className="h-7 w-7 text-[#61DBFB]" />, category: ['frontend', 'app'] },
@@ -75,6 +114,8 @@ const SkillsSection = () => {
     }
     return allSkills.filter((skill) => skill.category.includes(activeCategory));
   }, [activeCategory]);
+
+  const activeMeta = categoryMeta[activeCategory];
 
   const positionedSkills = useMemo(() => {
     const total = filteredSkills.length;
@@ -162,80 +203,143 @@ const SkillsSection = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative z-10 min-h-[78svh] scroll-mt-28 overflow-hidden px-3 py-4 text-white sm:min-h-[84svh] sm:px-5 sm:py-5 md:min-h-[88svh] md:px-8 lg:px-14"
+      className="relative z-10 scroll-mt-24 overflow-hidden px-3 py-10 text-white sm:px-5 sm:py-12 md:px-8 lg:px-10"
     >
-      <div className="mx-auto flex min-h-[78svh] w-full max-w-[1400px] flex-col justify-start gap-3 sm:min-h-[84svh] sm:gap-3.5 md:min-h-[88svh]">
-      <div className="text-center pt-1 sm:pt-2">
-        <motion.h2
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-extrabold tracking-tight text-white/95 sm:text-4xl md:text-5xl"
-        >
-          My Skills
-        </motion.h2>
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mx-auto mt-2 h-1 w-20 origin-left rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"
-        />
-      </div>
-
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-        {categories.map((category) => (
-          <button
-            key={category.key}
-            type="button"
-            onClick={() => handleCategorySelect(category.key)}
-            className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-all duration-300 sm:px-3.5 sm:py-1.5 sm:text-xs md:px-4 md:py-2 md:text-sm ${
-              activeCategory === category.key
-                ? 'border-cyan-300 bg-cyan-500/20 text-cyan-100 shadow-lg shadow-cyan-500/20'
-                : 'border-white/15 bg-white/5 text-white/75 hover:border-cyan-400/40 hover:text-white'
-            }`}
+      <div className="mx-auto w-full max-w-[1400px]">
+        <div className="mb-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="theme-pill mb-3 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold sm:text-sm"
           >
-            {category.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="relative flex min-h-0 flex-1 items-start justify-center overflow-visible pt-1 sm:pt-2">
-        <div className="relative h-[clamp(13.5rem,68vw,19rem)] w-full max-w-[min(145vw,68rem)] overflow-visible sm:h-[clamp(16rem,54vw,24rem)] sm:max-w-[min(132vw,74rem)] md:h-[clamp(18rem,46vw,28rem)] md:max-w-[min(120vw,82rem)] lg:h-[clamp(20rem,42vw,31rem)] lg:max-w-[min(112vw,92rem)]">
-          <Radar
-            mode="half"
-            showSweep={hasTriggeredInitialScan}
-            scanVersion={scanVersion}
-            sweepDurationSeconds={SWEEP_DURATION_SECONDS}
-            circlesCount={8}
-            circleStepRem={5.8}
-            className="pointer-events-none absolute left-1/2 bottom-0 z-10 w-[min(170vw,74rem)] -translate-x-1/2 sm:w-[min(155vw,80rem)] md:w-[min(138vw,86rem)] lg:w-[min(124vw,92rem)]"
+            <Cpu className="h-4 w-4" />
+            Tech Radar
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: -24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl font-extrabold tracking-tight text-white/95 sm:text-4xl"
+          >
+            My Skills
+          </motion.h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mx-auto mt-2 h-1 w-20 origin-left rounded-full theme-section-line"
           />
-
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
-
-          {positionedSkills.map((skill) => (
-            <motion.div
-              key={`${activeCategory}-${scanVersion}-${skill.name}`}
-              initial={{ opacity: 0, scale: 0.72, filter: 'blur(5px)' }}
-              animate={
-                hasTriggeredInitialScan
-                  ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
-                  : { opacity: 0, scale: 0.72, filter: 'blur(5px)' }
-              }
-              transition={{ duration: 0.24, delay: skill.delay, ease: 'easeOut' }}
-              className="absolute z-30 -translate-x-1/2 -translate-y-1/2 scale-[0.78] sm:scale-[0.88] md:scale-[0.96] lg:scale-100"
-              style={{ left: skill.left, top: skill.top }}
-            >
-              <IconContainer
-                icon={skill.icon}
-                text={skill.name}
-                delay={0}
-                className="drop-shadow-[0_0_18px_rgba(56,189,248,0.18)]"
-              />
-            </motion.div>
-          ))}
         </div>
-      </div>
+
+        <div className="grid items-stretch gap-4 lg:grid-cols-[0.34fr_0.66fr]">
+          <motion.aside
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="theme-panel flex flex-col justify-between rounded-2xl p-4 sm:p-5"
+          >
+            <div>
+              <div className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-300">
+                <Terminal className="h-4 w-4" />
+                stack-scanner
+              </div>
+
+              <h3 className="text-xl font-bold text-white sm:text-2xl">{activeMeta.title}</h3>
+              <p className="mt-2 text-sm leading-5 text-slate-300">{activeMeta.description}</p>
+
+              <div className="mt-4 rounded-xl border border-cyan-400/15 bg-slate-950/65 p-3 font-mono text-[11px] text-slate-300">
+                <span className="text-cyan-300">$</span> {activeMeta.command}
+              </div>
+
+            </div>
+
+            <div className="mt-5 grid gap-1.5">
+              {categories.map((category) => (
+                <button
+                  key={category.key}
+                  type="button"
+                  onClick={() => handleCategorySelect(category.key)}
+                  className={`group flex items-center justify-between rounded-xl border px-3 py-2 text-left text-xs font-semibold transition-all duration-300 sm:text-sm ${
+                    activeCategory === category.key
+                      ? 'border-cyan-300 bg-cyan-400/15 text-cyan-100 shadow-lg shadow-cyan-500/15'
+                      : 'border-cyan-400/10 bg-slate-950/45 text-slate-300 hover:border-cyan-400/40 hover:text-white'
+                  }`}
+                >
+                  <span>{category.label}</span>
+                  <span className="font-mono text-[10px] text-slate-500 group-hover:text-cyan-300">
+                    /{category.key}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </motion.aside>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, delay: 0.08 }}
+            className="theme-panel relative overflow-hidden rounded-2xl"
+          >
+            <div className="flex items-center justify-between border-b border-cyan-400/15 bg-slate-950/60 px-4 py-2.5">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-[#22c55e]" />
+                <span className="h-3 w-3 rounded-full bg-cyan-300" />
+                <span className="h-3 w-3 rounded-full bg-violet-300" />
+              </div>
+              <div className="flex items-center gap-2 font-mono text-xs text-slate-400">
+                <Layers3 className="h-4 w-4 text-cyan-300" />
+                skill-map.render()
+              </div>
+            </div>
+
+            <div className="relative flex min-h-[21rem] items-end justify-center overflow-hidden px-2 pt-4 sm:min-h-[23rem] md:min-h-[25rem] lg:min-h-[28rem]">
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.035)_1px,transparent_1px)] bg-[size:36px_36px]" />
+              <div className="pointer-events-none absolute inset-x-8 top-8 rounded-full bg-cyan-400/10 blur-3xl h-44" />
+
+              <div className="relative h-[clamp(14rem,40vw,25rem)] w-full max-w-[min(120vw,78rem)] overflow-visible">
+                <Radar
+                  mode="half"
+                  showSweep={hasTriggeredInitialScan}
+                  scanVersion={scanVersion}
+                  sweepDurationSeconds={SWEEP_DURATION_SECONDS}
+                  circlesCount={8}
+                  circleStepRem={5.8}
+                  className="pointer-events-none absolute left-1/2 bottom-0 z-10 w-[min(150vw,72rem)] -translate-x-1/2 sm:w-[min(138vw,78rem)] md:w-[min(120vw,84rem)] lg:w-[min(104vw,88rem)]"
+                />
+
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-cyan-200/70 to-transparent" />
+
+                {positionedSkills.map((skill) => (
+                  <motion.div
+                    key={`${activeCategory}-${scanVersion}-${skill.name}`}
+                    initial={{ opacity: 0, scale: 0.72, filter: 'blur(5px)' }}
+                    animate={
+                      hasTriggeredInitialScan
+                        ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
+                        : { opacity: 0, scale: 0.72, filter: 'blur(5px)' }
+                    }
+                    transition={{ duration: 0.24, delay: skill.delay, ease: 'easeOut' }}
+                    className="absolute z-30 -translate-x-1/2 -translate-y-1/2 scale-[0.7] sm:scale-[0.78] md:scale-[0.86] lg:scale-[0.92]"
+                    style={{ left: skill.left, top: skill.top }}
+                  >
+                    <IconContainer
+                      icon={skill.icon}
+                      text={skill.name}
+                      delay={0}
+                      className="drop-shadow-[0_0_18px_rgba(56,189,248,0.18)]"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

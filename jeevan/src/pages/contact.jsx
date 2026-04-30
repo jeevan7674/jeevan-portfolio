@@ -15,12 +15,12 @@ const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/ap
 
 // Reusable UI Components
 const Card = ({ className, children, ...props }) => (
-  <div className={`rounded-3xl border bg-white/5 shadow-md ${className}`} {...props}>
+  <div className={`theme-panel rounded-3xl ${className}`} {...props}>
     {children}
   </div>
 );
 const CardHeader = ({ children, className }) => (
-  <div className={`p-6 border-b border-purple-500/20 ${className}`}>{children}</div>
+  <div className={`p-6 border-b border-cyan-400/15 ${className}`}>{children}</div>
 );
 const CardTitle = ({ children, className }) => (
   <h3 className={`text-xl font-semibold ${className}`}>{children}</h3>
@@ -38,13 +38,13 @@ const Button = ({ children, className, ...props }) => (
 );
 const Input = ({ className, ...props }) => (
   <input
-    className={`w-full px-3 py-2 rounded-md bg-slate-900/50 border text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 ${className}`}
+    className={`w-full px-3 py-2 rounded-md bg-slate-950/60 border text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 ${className}`}
     {...props}
   />
 );
 const Textarea = ({ className, ...props }) => (
   <textarea
-    className={`w-full px-3 py-2 rounded-md bg-slate-900/50 border text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 ${className}`}
+    className={`w-full px-3 py-2 rounded-md bg-slate-950/60 border text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 ${className}`}
     {...props}
   />
 );
@@ -92,12 +92,12 @@ const TypewriterTextLoop = ({ texts, typingSpeed = 100, pauseTime = 1500 }) => {
 
   return (
     <h2
-      className="text-lg sm:text-3xl font-extrabold mb-6 text-center text-white cursor-default max-w-full break-all leading-relaxed px-2"
+      className="mb-6 max-w-full cursor-default overflow-hidden text-center text-[clamp(0.9rem,4vw,1.35rem)] font-extrabold leading-relaxed text-white sm:text-[clamp(1rem,2.2vw,1.55rem)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       {displayedText}
-      <span className="border-r-2 border-purple-400 animate-pulse ml-1" />
+      <span className="border-r-2 border-cyan-300 animate-pulse ml-1" />
     </h2>
   );
 };
@@ -191,12 +191,12 @@ const Contact = () => {
     <section id="contact" className="py-20  overflow-hidden">
       <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} className="container mx-auto px-4">
         <motion.div variants={fadeInUp} className="text-center mb-16 px-4">
-          <div className="inline-block px-4 py-2 bg-purple-500/20 rounded-full mb-6">
-            <span className="text-purple-400 text-sm font-medium">Let's work together</span>
+          <div className="theme-pill inline-block px-4 py-2 rounded-full mb-6">
+            <span className="text-sm font-medium">Let's work together</span>
           </div>
           <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-purple-400 to-violet-400 mx-auto mb-4" />
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <div className="w-20 h-1 theme-section-line mx-auto mb-4" />
+          <p className="text-slate-300 max-w-2xl mx-auto">
             Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.
           </p>
         </motion.div>
@@ -204,40 +204,40 @@ const Contact = () => {
         <motion.div variants={fadeInUp} className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 px-2 sm:px-4 max-w-6xl mx-auto">
           {/* Left Column */}
           <div className="flex flex-col gap-6">
-            <Card className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 text-white p-6 sm:p-8">
+            <Card className="text-white p-6 sm:p-8">
               <h2 className="text-3xl font-bold mb-4 text-center">Resume</h2>
-              <p className="text-sm text-gray-300 mb-6 text-center">
+              <p className="text-sm text-slate-300 mb-6 text-center">
                 Take a look at my professional experience and skills. You can view it directly in your browser or download a PDF copy for your convenience.
               </p>
               <div className="flex justify-center gap-4 flex-wrap">
                 <a href={resumeUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white shadow-md transition-transform transform hover:scale-105 gap-2"
+                  className="inline-flex items-center px-5 py-2 rounded-lg text-sm font-medium theme-primary-button transition-transform transform hover:scale-105 gap-2"
                 >
                   <Eye className="w-5 h-5" /> View Online
                 </a>
                 <a href={downloadResumeUrl} target="_blank" rel="noopener noreferrer" download
-                  className="inline-flex items-center px-5 py-2 rounded-lg text-sm font-medium bg-slate-700 hover:bg-slate-600 text-white border border-slate-500 transition-transform transform hover:scale-105 gap-2"
+                  className="inline-flex items-center px-5 py-2 rounded-lg text-sm font-medium theme-secondary-button transition-transform transform hover:scale-105 gap-2"
                 >
-                  <DownloadIcon className="w-5 h-5 text-blue-300" /> Download CV (.pdf)
+                  <DownloadIcon className="w-5 h-5 text-cyan-300" /> Download CV (.pdf)
                 </a>
               </div>
             </Card>
 
-            <Card className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 text-white p-6 sm:p-10">
-              <p className="uppercase tracking-widest text-sm mb-4 sm:mb-6 text-center text-purple-300">Looking for a new talent?</p>
+            <Card className="text-white p-6 sm:p-10">
+              <p className="uppercase tracking-widest text-sm mb-4 sm:mb-6 text-center text-cyan-300">Looking for a new talent?</p>
               <TypewriterTextLoop
                 texts={[
                   'r.jeevanreddys680@gmail.com',
                 ]}
               />
               <div className="flex justify-center flex-wrap gap-4 sm:gap-6 text-base mt-4 sm:mt-8">
-                <a href="https://linkedin.com/injeevan-reddy680" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 flex items-center gap-2">
-                  <LinkedinIcon className="w-5 h-5 text-blue-400" /> LinkedIn
+                <a href="https://linkedin.com/in/jeevan-reddy680" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-300 flex items-center gap-2">
+                  <LinkedinIcon className="w-5 h-5 text-cyan-300" /> LinkedIn
                 </a>
-                <a href="https://github.com/jeevan7674" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 flex items-center gap-2">
-                  <GithubIcon className="w-5 h-5 text-gray-300" /> GitHub
+                <a href="https://github.com/jeevan7674" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-300 flex items-center gap-2">
+                  <GithubIcon className="w-5 h-5 text-slate-300" /> GitHub
                 </a>
-                <a href="https://www.behance.net/jeevanreddy680" target="_blank" rel="noopener noreferrer" className="hover:text-purple-200 flex items-center gap-2">
+                <a href="https://www.behance.net/jeevanreddy680" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-300 flex items-center gap-2">
                   <span className="text-xl font-bold">𝔅</span> Behance
                 </a>
               </div>
@@ -245,7 +245,7 @@ const Contact = () => {
           </div>
 
           {/* Right Column: Contact Form */}
-          <Card className="bg-slate-800/50 backdrop-blur-sm border-purple-500/20">
+          <Card>
             <CardHeader>
               <CardTitle className="text-2xl text-white">Send Me a Message</CardTitle>
             </CardHeader>
@@ -257,7 +257,7 @@ const Contact = () => {
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    className="flex flex-col items-center justify-center text-green-400 space-y-4 py-12"
+                    className="flex flex-col items-center justify-center text-[#22c55e] space-y-4 py-12"
                   >
                     <CheckCircle className="w-12 h-12" />
                     <p className="text-lg font-semibold text-center">Your message has been sent!</p>
@@ -266,7 +266,7 @@ const Contact = () => {
                   <motion.form onSubmit={handleSubmit} className="space-y-6">
                     {['name', 'email', 'subject'].map((field, idx) => (
                       <div key={idx}>
-                        <Label htmlFor={field} className="text-gray-300">
+                        <Label htmlFor={field} className="text-slate-300">
                           {field === 'name' ? 'Full Name' : field === 'email' ? 'Email Address' : 'Subject'} *
                         </Label>
                         <Input
@@ -283,12 +283,12 @@ const Contact = () => {
                                 ? 'you@example.com'
                                 : 'Subject about cooperation opportunities...'
                           }
-                          className="mt-2 bg-slate-900/50 border-purple-500/30 text-white placeholder:text-gray-400"
+                          className="mt-2 border-cyan-400/20 text-white placeholder:text-slate-400"
                         />
                       </div>
                     ))}
                     <div>
-                      <Label htmlFor="message" className="text-gray-300">Message *</Label>
+                      <Label htmlFor="message" className="text-slate-300">Message *</Label>
                       <Textarea
                         id="message"
                         name="message"
@@ -297,13 +297,13 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         placeholder="Your detailed message here..."
-                        className="mt-2 bg-slate-900/50 border-purple-500/30 text-white placeholder:text-gray-400 resize-none"
+                        className="mt-2 border-cyan-400/20 text-white placeholder:text-slate-400 resize-none"
                       />
                     </div>
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
+                      className="w-full theme-primary-button py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
                     >
                       {isSubmitting ? 'Sending...' : (<><Send className="mr-2 h-4 w-4" />Send Message</>)}
                     </Button>

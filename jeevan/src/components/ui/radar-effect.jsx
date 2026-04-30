@@ -95,13 +95,13 @@ export const Radar = ({
           style={{
             height: `${(idx + 1) * circleStepRem}rem`,
             width: `${(idx + 1) * circleStepRem}rem`,
-            border: `1px solid rgba(255, 255, 255, ${Math.max(0.18, 0.54 - idx * 0.045)})`,
+            border: `1px solid rgba(34, 211, 238, ${Math.max(0.16, 0.44 - idx * 0.04)})`,
           }}
           key={`circle-${idx}`}
           idx={idx}
           className={twMerge(
             isHalf
-              ? 'left-1/2 top-full -translate-x-1/2 -translate-y-1/2 border-white/30'
+              ? 'left-1/2 top-full -translate-x-1/2 -translate-y-1/2 border-cyan-300/30'
               : undefined
           )}
         />
@@ -123,7 +123,7 @@ export const IconContainer = ({ icon, text, delay, className }) => {
         className
       )}
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 shadow-inner transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105 sm:h-11 sm:w-11 sm:rounded-2xl md:h-12 md:w-12">
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/15 bg-slate-900 shadow-inner transition-transform duration-200 group-hover:scale-105 group-hover:border-cyan-300/35 group-focus-visible:scale-105 sm:h-11 sm:w-11 sm:rounded-2xl md:h-12 md:w-12">
         {icon || (
           <svg className="h-8 w-8 text-slate-600" fill="currentColor" viewBox="0 0 20 20">
             <path
@@ -136,7 +136,7 @@ export const IconContainer = ({ icon, text, delay, className }) => {
       </div>
       {text ? (
         <div className="pointer-events-none absolute top-full mt-2 translate-y-1 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
-          <div className="whitespace-nowrap rounded-full border border-white/10 bg-slate-950/75 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-slate-200 shadow-lg backdrop-blur-md sm:px-3 sm:text-[11px]">
+          <div className="whitespace-nowrap rounded-full border border-cyan-400/15 bg-slate-950/85 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-slate-200 shadow-lg backdrop-blur-md sm:px-3 sm:text-[11px]">
             {text}
           </div>
         </div>

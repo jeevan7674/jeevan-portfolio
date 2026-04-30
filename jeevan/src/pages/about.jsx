@@ -1,151 +1,130 @@
-import { StarsBackground } from '@/components/animate-ui/backgrounds/stars';
-import { motion, useInView } from 'motion/react';
+import { motion, useInView } from 'framer-motion';
+import { Code2, GraduationCap, MapPin, Rocket } from 'lucide-react';
 import { useRef } from 'react';
 
-const Card = ({ className, children, ...props }) => (
-  <motion.div
-    whileHover={{ scale: 1.02 }}
-    transition={{ duration: 0.3 }}
-    className={`rounded-2xl border border-purple-500/30 bg-white/5 backdrop-blur-md shadow-xl p-6 ${className}`}
-    {...props}
-  >
-    {children}
-  </motion.div>
-);
+const focusItems = [
+  {
+    icon: Code2,
+    title: 'Frontend systems',
+    text: 'React, Next.js, Tailwind, reusable UI patterns, and responsive flows.',
+  },
+  {
+    icon: Rocket,
+    title: 'Product execution',
+    text: 'Turning ideas into usable screens, connected APIs, and deployable apps.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Learning loop',
+    text: 'Computer Science student sharpening full-stack fundamentals every build.',
+  },
+];
+
+const commits = [
+  'Studying CSE at S.R.K.R Engineering College',
+  'Building MERN and Next.js products',
+  'Exploring mobile apps, automations, and practical AI workflows',
+];
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
   };
 
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden text-white"
+      className="relative overflow-hidden px-4 py-16 text-white sm:px-6 md:py-20 lg:px-8"
     >
-      {/* Optional background stars */}
-      {/* <StarsBackground className="absolute inset-0 z-0" /> */}
+      <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
+      <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-violet-400/10 blur-3xl" />
 
-      {/* Decorative blur circles (matched with Education section) */}
-      <div className="absolute top-0 right-0 w-56 h-56 bg-purple-500/10 rounded-full blur-2xl z-0" />
-      <div className="absolute bottom-0 left-0 w-56 h-56 bg-violet-500/10 rounded-full blur-2xl z-0" />
-
-      <div ref={ref} className="relative z-10 max-w-7xl mx-auto w-full">
+      <div ref={ref} className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
         <motion.div
-          className="text-center mb-12 md:mb-16"
-          variants={containerVariants}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+          }}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          <motion.div
-            className="inline-block px-5 py-2 bg-purple-600/20 rounded-full mb-4"
-            variants={itemVariants}
-          >
-            <span className="text-purple-300 text-sm font-medium">My Journey</span>
+          <motion.div className="theme-pill mb-4 inline-flex rounded-full px-5 py-2 text-sm font-medium" variants={itemVariants}>
+            My Journey
           </motion.div>
-          <motion.h2
-            className="text-3xl md:text-5xl font-bold mb-4"
-            variants={itemVariants}
-          >
-            About Me
+          <motion.h2 className="max-w-3xl text-3xl font-black tracking-tight sm:text-4xl md:text-5xl" variants={itemVariants}>
+            From student builder to full-stack product developer.
           </motion.h2>
-          <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-purple-400 to-violet-400 mx-auto rounded"
-            variants={itemVariants}
-          />
+          <motion.div className="mt-4 h-1 w-24 rounded theme-section-line" variants={itemVariants} />
+          <motion.p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg" variants={itemVariants}>
+            I am R. Jeevan Reddy, a third-year software engineering student from Bhimavaram. I like building products where the interface, performance, and backend logic all feel connected instead of stitched together.
+          </motion.p>
+          <motion.p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg" variants={itemVariants}>
+            My strongest lane is frontend and full-stack development with React, Next.js, Node, Express, and MongoDB. I care about clean visual systems, fast feedback, and code that remains easy to extend.
+          </motion.p>
+
+          <motion.div className="mt-7 flex flex-wrap gap-3 text-sm" variants={itemVariants}>
+            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-cyan-200">
+              <MapPin className="h-4 w-4" />
+              Bhimavaram, Andhra Pradesh
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#22c55e]/25 bg-[#22c55e]/10 px-4 py-2 text-[#22c55e]">
+              Available for work
+            </span>
+          </motion.div>
         </motion.div>
 
         <motion.div
-          className="grid lg:grid-cols-2 gap-10 items-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          className="grid gap-5 lg:grid-cols-[0.78fr_1fr]"
+          initial={{ opacity: 0, y: 28 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+          transition={{ duration: 0.65, delay: 0.15 }}
         >
-          {/* Profile Image */}
-          <motion.div className="flex justify-center" variants={itemVariants}>
-            <div className="relative max-w-xs w-full">
-              <motion.img
-                src="jeevanreddy680.jpg"
-                alt="Jeevan Reddy"
-                className="rounded-3xl w-full h-auto shadow-lg border-2 border-purple-500/30 object-cover"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div
-                className="absolute bottom-4 left-4 bg-green-600 px-3 py-1 rounded-full flex items-center shadow-md"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1, duration: 0.5 }}
-              >
-                <motion.div
-                  className="w-2 h-2 bg-white rounded-full mr-2"
-                  animate={{ scale: [1, 1.4, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
-                <span className="text-white text-sm font-medium">Available for work</span>
-              </motion.div>
+          <div className="relative mx-auto w-full max-w-xs lg:max-w-none">
+            <div className="absolute -inset-4 rounded-[2rem] bg-cyan-400/10 blur-3xl" />
+            <img
+              src="jeevanreddy680.jpg"
+              alt="Jeevan Reddy"
+              className="relative aspect-[4/5] w-full rounded-2xl border border-cyan-400/25 object-cover shadow-2xl"
+            />
+            <div className="theme-panel absolute -bottom-5 left-4 right-4 rounded-xl px-4 py-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-300">current mode</p>
+              <p className="mt-1 text-sm font-semibold text-white">Building, learning, shipping</p>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Text Content */}
-          <motion.div
-            className="space-y-6 text-base sm:text-lg leading-relaxed text-gray-200"
-            variants={containerVariants}
-          >
-            <motion.p variants={itemVariants}>
-              Hi, I’m <span className="text-purple-400 font-semibold">R.Jeevan Reddy</span> — a third-year software
-              engineering student at the S.R.K.R Engineering College, currently living in Bhimavaram. I love building
-              fast, intuitive, and user-centered web and mobile applications.
-            </motion.p>
-            <motion.p variants={itemVariants}>
-              I specialize in frontend development using{' '}
-              <span className="text-purple-400 font-semibold">React</span> and{' '}
-              <span className="text-purple-400 font-semibold">Next.js</span>. I'm passionate about beautiful design,
-              seamless user experience, and performance optimization.
-            </motion.p>
-            <motion.p variants={itemVariants}>
-              I enjoy collaborating with creative teams to build meaningful digital products and I'm always eager to
-              learn and grow.
-            </motion.p>
+          <div className="grid gap-4">
+            <div className="theme-panel rounded-2xl p-5">
+              <p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-300">commit history</p>
+              <div className="mt-4 space-y-3">
+                {commits.map((commit, index) => (
+                  <div key={commit} className="flex gap-3">
+                    <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.5)]" />
+                    <p className="text-sm leading-6 text-slate-300">
+                      <span className="font-mono text-slate-500">#{index + 1}</span> {commit}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-            {/* Contact Info */}
-            <Card>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm sm:text-base">
-                <div>
-                  <h4 className="text-purple-300 font-semibold mb-1">Name</h4>
-                  <p className="text-white">R.Jeevan Reddy</p>
-                </div>
-                <div>
-                  <h4 className="text-purple-300 font-semibold mb-1">Email</h4>
-                  <p className="text-white">r.jeevanreddys680@gmail.com</p>
-                </div>
-                <div>
-                  <h4 className="text-purple-300 font-semibold mb-1">Location</h4>
-                  <p className="text-white">Bhimavaram, Andhra Pradesh</p>
-                </div>
-                <div>
-                  <h4 className="text-purple-300 font-semibold mb-1">Availability</h4>
-                  <p className="text-green-400">Open to opportunities</p>
+            {focusItems.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="theme-panel rounded-2xl p-4">
+                <div className="flex gap-3">
+                  <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 p-2 text-cyan-200">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white">{title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-300">{text}</p>
+                  </div>
                 </div>
               </div>
-            </Card>
-          </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
