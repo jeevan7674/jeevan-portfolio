@@ -1,4 +1,4 @@
-import { GraduationCap, Award, Calendar } from 'lucide-react';
+import { GraduationCap, Award, Calendar, BookOpen, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Reusable UI Components
@@ -104,95 +104,100 @@ const Education = () => {
   ];
 
   return (
-    <section
-      id="education"
-      className="py-20 relative overflow-hidden"
-    >
-      {/* Decorative Blur Circles */}
-      <div className="absolute top-0 right-0 w-56 h-56 bg-cyan-400/10 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-0 left-0 w-56 h-56 bg-violet-400/10 rounded-full blur-2xl"></div>
+    <section id="education" className="relative overflow-hidden px-4 py-16 text-white sm:px-6 md:py-20 lg:px-8">
+      <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
+      <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-violet-400/10 blur-3xl" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}>
-
-          {/* Section Header */}
-          <motion.div variants={fadeInUp} className="text-center mb-14">
-            <div className="theme-pill inline-block px-4 py-2 rounded-full mb-4">
+          <motion.div variants={fadeInUp} className="mb-10 text-center lg:text-left">
+            <div data-section-anchor className="theme-pill inline-flex px-4 py-2 rounded-full mb-4">
               <span className="text-sm font-medium">Academic Background</span>
             </div>
-            <h2 className="text-4xl font-bold text-white mb-3">Education & Activities</h2>
-            <div className="w-24 h-1 mx-auto theme-section-line" />
+            <h2 className="text-4xl font-black text-white mb-3 sm:text-5xl">Education & Activities</h2>
+            <div className="h-1 w-24 rounded theme-section-line mx-auto lg:mx-0" />
+            <p className="mx-auto mt-5 max-w-3xl text-slate-300 lg:mx-0">
+              The coursework, clubs, competitions, and experiments that shaped how I think about building products.
+            </p>
           </motion.div>
 
-          {/* Education & Activities */}
-          <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-            {/* Education Column */}
-            <div>
-              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
-                <GraduationCap className="mr-3 h-6 w-6 text-cyan-300" /> Education
-              </h3>
-              <div className="space-y-6">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <motion.div variants={fadeInUp} className="theme-panel rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between border-b border-cyan-400/15 bg-slate-950/65 px-4 py-3">
+                <div className="flex items-center gap-2 text-cyan-300">
+                  <BookOpen className="h-4 w-4" />
+                  <span className="font-mono text-xs uppercase tracking-[0.22em]">learning-path.ts</span>
+                </div>
+                <span className="text-xs text-slate-500">3 records</span>
+              </div>
+              <div className="p-4 sm:p-5 space-y-4">
                 {education.map((edu, index) => (
-                  <motion.div key={index} custom={index} variants={fadeInUp}>
-                    <Card className="hover:bg-slate-800/70">
+                  <motion.div key={edu.degree} custom={index} variants={fadeInUp}>
+                    <Card className="overflow-hidden">
                       <CardHeader>
-                        <CardTitle>{edu.degree}</CardTitle>
-                        <div className="flex items-center text-sm text-slate-400 mt-1">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <CardTitle className="mb-1">{edu.degree}</CardTitle>
+                            <p className="text-cyan-300 font-medium text-sm">{edu.school}</p>
+                          </div>
+                          <Badge>{edu.gpa}</Badge>
+                        </div>
+                        <div className="mt-3 flex items-center text-sm text-slate-400">
                           <Calendar className="mr-2 h-4 w-4" /> {edu.period}
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-cyan-300 font-medium mb-2">{edu.school}</p>
-                        <p className="text-slate-300 text-sm mb-2">{edu.description}</p>
-                        <Badge>GPA: {edu.gpa}</Badge>
+                        <p className="text-slate-300 text-sm leading-6">{edu.description}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            {/* Activities Column */}
-            <div>
-              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
-                <Award className="mr-3 h-6 w-6 text-violet-300" /> Activities & Achievements
-              </h3>
-              <div className="space-y-6">
-                {activities.map((activity, index) => (
-                  <motion.div key={index} custom={index} variants={fadeInUp}>
-                    <Card className="hover:bg-slate-800/70">
-                      <CardHeader>
-                        <CardTitle>{activity.title}</CardTitle>
-                        <div className="flex items-center text-sm text-slate-400 mt-1">
-                          <Calendar className="mr-2 h-4 w-4" /> {activity.period}
+            <div className="grid gap-6">
+              <motion.div variants={fadeInUp} className="theme-panel rounded-2xl overflow-hidden">
+                <div className="flex items-center justify-between border-b border-cyan-400/15 bg-slate-950/65 px-4 py-3">
+                  <div className="flex items-center gap-2 text-violet-200">
+                    <Sparkles className="h-4 w-4" />
+                    <span className="font-mono text-xs uppercase tracking-[0.22em]">activity-feed.log</span>
+                  </div>
+                  <span className="text-xs text-slate-500">5 highlights</span>
+                </div>
+                <div className="p-4 sm:p-5 space-y-4">
+                  {activities.map((activity, index) => (
+                    <motion.div key={activity.title} custom={index} variants={fadeInUp} className="rounded-xl border border-cyan-400/12 bg-slate-950/45 p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <h3 className="text-base font-semibold text-white">{activity.title}</h3>
+                          <div className="mt-2 flex items-center text-sm text-slate-400">
+                            <Calendar className="mr-2 h-4 w-4" /> {activity.period}
+                          </div>
                         </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-slate-300 text-sm">{activity.description}</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
+                        <Award className="h-5 w-5 shrink-0 text-violet-300" />
+                      </div>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">{activity.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeInUp} className="theme-panel rounded-2xl p-5">
+                <h3 className="text-xl font-semibold text-white mb-4">Certifications</h3>
+                <div className="flex flex-wrap gap-3">
+                  {certifications.map((cert) => (
+                    <Badge
+                      key={cert}
+                      variant="outline"
+                      className="hover:bg-violet-400/15 transition-all duration-300"
+                    >
+                      {cert}
+                    </Badge>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </div>
-
-          {/* Certifications Section */}
-          <motion.div variants={fadeInUp} className="text-center mt-16">
-            <h3 className="text-2xl font-semibold text-white mb-6">Certifications</h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {certifications.map((cert, index) => (
-                <Badge
-                  key={index}
-                  variant="outline"
-                  className="hover:bg-violet-400/15 transition-all duration-300"
-                >
-                  {cert}
-                </Badge>
-              ))}
-            </div>
-          </motion.div>
-
         </motion.div>
       </div>
     </section>

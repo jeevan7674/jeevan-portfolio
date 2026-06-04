@@ -35,7 +35,7 @@ const Header = () => {
           }
         });
       },
-      { rootMargin: '-50% 0px -45% 0px', threshold: 0.1 }
+      { rootMargin: '-42% 0px -52% 0px', threshold: 0.01 }
     );
 
     navItems.forEach((item) => {
@@ -50,8 +50,8 @@ const Header = () => {
     const element = document.querySelector(href);
     if (element) {
       const header = document.querySelector('header');
-      const target = element.querySelector('.theme-pill, h1, h2') || element;
-      const headerOffset = (header?.offsetHeight ?? 72) + 12;
+      const target = element.querySelector('[data-section-anchor], .theme-pill, h1, h2') || element;
+      const headerOffset = (header?.offsetHeight ?? 72) + 6;
       const targetTop = target.getBoundingClientRect().top + window.scrollY;
 
       window.scrollTo({
